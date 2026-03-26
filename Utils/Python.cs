@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-
-namespace chesti
+﻿namespace chesti.Utils
 {
     public static class Python
     {
@@ -27,11 +20,16 @@ namespace chesti
         }
         public static void sleep(int time)
         {
-            System.Threading.Thread.Sleep(time);
+            Thread.Sleep(time);
         }
         public static ConsoleKeyInfo readKey()
         {
             return Console.ReadKey();
+        }
+        public static int randInt(int min, int max)
+        {
+            Random r = new Random();
+            return r.Next(min, max + 1);
         }
     }
 }
