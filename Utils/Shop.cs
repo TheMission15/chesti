@@ -15,13 +15,13 @@ namespace chesti.Utils
                 player.KeyCount += amount;
                 Console.WriteLine($"You got {amount} keys\n\n Keys:{player.KeyCount}\n Gold:{player.GoldCount}");
                 sleep(100);
-                clear();
+                readKey();
             }
             else
             {
                 Console.WriteLine("You dont have enough gold");
                 sleep(100);
-                clear();
+                readKey();
             }
         }
         public static void ShopMenu(Player player)
@@ -29,10 +29,10 @@ namespace chesti.Utils
             while (true)
             {
                 clear();
-                print($"    Welcome Shop    \n Gold:{player.GoldCount} \n B for back \n 1. 10 coins = 3 keys \n 2. 20 coins = 8 keys");
+                print($"    Welcome Shop    \n Gold:{player.GoldCount} \n Esc for back \n 1. 10 coins = 3 keys \n 2. 20 coins = 8 keys");
                 shopInput = readKey();
 
-                if (shopInput.Key == ConsoleKey.B)
+                if (shopInput.Key == ConsoleKey.Escape)
                 {
                     break;
                 }

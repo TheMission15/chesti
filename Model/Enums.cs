@@ -7,6 +7,7 @@
 }
 public enum Element
 {
+    Neutral,
     Fire,
     Water,
     Lightning,
@@ -14,21 +15,20 @@ public enum Element
 }
 public enum Group
 {
+    Gloves,
     Sword,
     Bow,
     Axe,
     Hammer,
-    Dagger,
-
 }
-public enum MoveType
+public enum MoveType  // this is wrong but i might still use it later
 {
     Main,
     Sub,
     Special,
     Filler,
 }
-public enum EnchantType
+public enum EnchantType   // further into development
 {
     
 }

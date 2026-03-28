@@ -11,7 +11,7 @@ namespace chesti.Utils
             while (true)
             {
                 clear();
-                print("    MENU    \n K for Wallet \n I for inventory \n B for back");
+                print("    MENU    \n Esc for back \n K for Wallet \n I for inventory");
                 holdingsInput = readKey();
 
 
@@ -28,12 +28,12 @@ namespace chesti.Utils
                     print("Inventory:");
                     foreach (Item item in player.Inventory)
                     {
-                        print($"{item.Name}, {item.Rarity}");
+                        print($"{item.Name}, {item.Durability}, {item.Rarity}");
                     }
                     sleep(100);
                     readKey();
                 }
-                if (holdingsInput.Key == ConsoleKey.B)
+                if (holdingsInput.Key == ConsoleKey.Escape)
                 {
                     break;
                 }

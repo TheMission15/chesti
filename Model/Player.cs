@@ -11,7 +11,8 @@ namespace chesti.Model
         public string Name { get; set; }
         public int KeyCount { get; set; }
         public int GoldCount { get; set; }
-        public Move Base {  get; set; }
+        public Item Selected { get; set; }
+        public Skill[] Skills { get; set; }
         public List<Item> Inventory { get; set; }
 
         public Player(string name, int keys, int gold)
@@ -19,6 +20,8 @@ namespace chesti.Model
             Name = name;
             KeyCount = keys;
             GoldCount = gold;
+            Selected = Catalogue.Items[0].Copy();
+            Skills = new Skill[3];
             Inventory = new List<Item>();
         }
     }
