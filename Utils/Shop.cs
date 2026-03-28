@@ -13,15 +13,12 @@ namespace chesti.Utils
             {
                 player.GoldCount -= price;
                 player.KeyCount += amount;
-                Console.WriteLine($"You got {amount} keys\n\n Keys:{player.KeyCount}\n Gold:{player.GoldCount}");
-                sleep(100);
-                readKey();
+                popUp($"You got {amount} keys\n\n Keys:{player.KeyCount}\n Gold:{player.GoldCount}", true);  
             }
             else
             {
-                Console.WriteLine("You dont have enough gold");
-                sleep(100);
-                readKey();
+                popUp("You dont have enough gold", true);
+                
             }
         }
         public static void ShopMenu(Player player)

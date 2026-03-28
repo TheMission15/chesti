@@ -29,8 +29,8 @@ namespace chesti.Utils
         public static void Fight(Player first, Player second)
         {
             int firstCounter = 1; int secondCounter = 1;
-            int firstWait = calculateTurn(first, first.Skills[0]);
-            int secondWait = calculateTurn(second, second.Skills[0]);
+            int firstWait = calculateTurn(first, Catalogue.Skills[0]);
+            int secondWait = calculateTurn(second, Catalogue.Skills[0]);
             if (firstCounter == secondCounter)
             {
                 print("hi");

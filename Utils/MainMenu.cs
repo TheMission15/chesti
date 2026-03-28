@@ -4,17 +4,23 @@ using static chesti.Utils.Shop;
 using static chesti.Utils.Holdings;
 using static chesti.Utils.Upgrades;
 using static chesti.Utils.Training;
+using static chesti.Utils.DataManager;
 
 namespace chesti.Utils
 {
     public static class MainMenu
     {
-        public static Player mission = new Player("Mission", 10, 50);
         public static ConsoleKeyInfo menuInput;
         public static int adminLock = 0;
-
+        public static string? username;
         public static void Menu()
         {
+            while (username == null)
+            {
+                clear();
+                username = input("Username: ");
+            }
+            Player player = PlayerSaves(username);
             while (true)
             {
                 clear(); print("Esc for leave \n E for upgrades \n F for menu \n S for shop \n T for training ");
@@ -35,7 +41,6 @@ namespace chesti.Utils
                             {
                                 clear();
                                 print("Welcome to admin panel");
-                                sleep(100);
                                 readKey();
                             }
                         }
@@ -49,22 +54,22 @@ namespace chesti.Utils
                 //game loop
                 if (menuInput.Key == ConsoleKey.E)  // open chests
                 {
-                    UpgradeMenu(mission);
+                    UpgradeMenu(player);
                 }
 
                 if (menuInput.Key == ConsoleKey.S)  // shop
                 {
-                    ShopMenu(mission);
+                    ShopMenu(player);
                 }
 
                 if (menuInput.Key == ConsoleKey.F) // holdings
                 {
-                    HoldingsMenu(mission);
+                    HoldingsMenu(player);
                 }
 
                 if (menuInput.Key == ConsoleKey.T) // training
                 {
-                    TrainingMenu(mission);
+                    TrainingMenu(player);
                 }
 
                 if (menuInput.Key == ConsoleKey.Escape) // leave
@@ -73,6 +78,7 @@ namespace chesti.Utils
                 }
             }
             clear();
+            SavePlayer(player);
             print("Cya");
         }
     }

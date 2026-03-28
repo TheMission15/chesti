@@ -31,5 +31,15 @@
             Random r = new Random();
             return r.Next(min, max + 1);
         }
+        public static void popUp(string text, bool clearOff = false, int sleeper = 100)
+        {
+            if (clearOff == false)
+            {
+                clear();
+            }
+            print(text);
+            sleep(sleeper);
+            readKey();
+        }
     }
 }

@@ -11,18 +11,15 @@ namespace chesti.Model
         public string Name { get; set; }
         public int KeyCount { get; set; }
         public int GoldCount { get; set; }
-        public Item Selected { get; set; }
-        public Skill[] Skills { get; set; }
+        public Item? Selected { get; set; }
+        public Skill?[] Skills { get; set; }
         public List<Item> Inventory { get; set; }
 
-        public Player(string name, int keys, int gold)
+        public Player(string name, int keyCount, int goldCount)
         {
-            Name = name;
-            KeyCount = keys;
-            GoldCount = gold;
-            Selected = Catalogue.Items[0].Copy();
-            Skills = new Skill[3];
-            Inventory = new List<Item>();
+            Name = name;KeyCount = keyCount;GoldCount = goldCount;
+            Skills = new Skill?[3];
+            Inventory = new List<Item>() {};
         }
     }
 }

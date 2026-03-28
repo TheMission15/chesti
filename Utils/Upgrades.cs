@@ -37,10 +37,7 @@ namespace chesti.Utils
 
             if (player.KeyCount == 0)
             {
-                clear();
-                print("You dont have any keys");
-                sleep(100);
-                readKey();
+                popUp("You dont have any keys");
             }
             else if (player.KeyCount < 0)
             {
@@ -69,9 +66,7 @@ namespace chesti.Utils
                                     clear();
                                     print("You got a");
                                     sleep(450);
-                                    print($"{item.Name}, {item.Durability}, {item.Rarity}");
-                                    sleep(100);
-                                    readKey();
+                                    popUp($"{item.Name}, {item.Durability}, {item.Rarity}", true);
                                     break;
                                 }
                                 roll--;
@@ -97,9 +92,10 @@ namespace chesti.Utils
             print($"Skill aquired {skill.Name}");
             for (int i = 0; i < player.Skills.Length; i++)
             {
-                if (player.Skills[i] != null)
+                Skill? playerSkill = player.Skills[i];
+                if (playerSkill != null)
                 {
-                    print($"{i + 1}. {player.Skills[i].Name}, {player.Skills[i].Damage} power, {player.Skills[i].Speed} speed");
+                    print($"{i + 1}. {playerSkill.Name}, {playerSkill.Damage} power, {playerSkill.Speed} speed");
                 }
                 else
                 {

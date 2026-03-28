@@ -11,8 +11,4 @@
     <None Remove="README.md" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="EntityFramework" Version="6.5.1" />
-  </ItemGroup>
-
 </Project>

@@ -1,0 +1,93 @@
+{
+  "Name": "mission",
+  "KeyCount": 26,
+  "GoldCount": 999999940,
+  "Selected": null,
+  "Skills": [
+    {
+      "Name": "Slash",
+      "Damage": 15,
+      "Speed": 5
+    },
+    {
+      "Name": "Punch",
+      "Damage": 10,
+      "Speed": 4
+    },
+    null
+  ],
+  "Inventory": [
+    {
+      "Name": "Hammer",
+      "Durability": 83,
+      "Weight": 15,
+      "Group": 4,
+      "Rarity": 0,
+      "Element": 0
+    },
+    {
+      "Name": "Heavy Hammer",
+      "Durability": 96,
+      "Weight": 17,
+      "Group": 4,
+      "Rarity": 0,
+      "Element": 0
+    },
+    {
+      "Name": "Light Axe",
+      "Durability": 39,
+      "Weight": 7,
+      "Group": 3,
+      "Rarity": 0,
+      "Element": 0
+    },
+    {
+      "Name": "Heavy Sword",
+      "Durability": 95,
+      "Weight": 17,
+      "Group": 1,
+      "Rarity": 0,
+      "Element": 0
+    },
+    {
+      "Name": "Better Sword",
+      "Durability": 123,
+      "Weight": 10,
+      "Group": 1,
+      "Rarity": 1,
+      "Element": 0
+    },
+    {
+      "Name": "Heavy Hammer",
+      "Durability": 93,
+      "Weight": 17,
+      "Group": 4,
+      "Rarity": 0,
+      "Element": 0
+    },
+    {
+      "Name": "Bow",
+      "Durability": 59,
+      "Weight": 5,
+      "Group": 2,
+      "Rarity": 0,
+      "Element": 0
+    },
+    {
+      "Name": "Heavy Sword",
+      "Durability": 91,
+      "Weight": 17,
+      "Group": 1,
+      "Rarity": 0,
+      "Element": 0
+    },
+    {
+      "Name": "Better Bow",
+      "Durability": 143,
+      "Weight": 5,
+      "Group": 2,
+      "Rarity": 1,
+      "Element": 0
+    }
+  ]
+}
