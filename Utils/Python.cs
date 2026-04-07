@@ -1,4 +1,6 @@
-﻿namespace chesti.Utils
+﻿using chesti.Model;
+
+namespace chesti.Utils
 {
     public static class Python
     {
@@ -24,7 +26,7 @@
         }
         public static ConsoleKeyInfo readKey()
         {
-            return Console.ReadKey();
+            return Console.ReadKey(true);
         }
         public static int randInt(int min, int max)
         {
@@ -40,6 +42,17 @@
             print(text);
             sleep(sleeper);
             readKey();
+        }
+        public static void page(string text, string extra = "")
+        {
+            if (text == "Chesti")
+            {
+                print($"Esc to LEAVE          {text}          {extra}\n\n");
+            }
+            else
+            {
+                print($"Esc to go back          {text}          {extra}\n\n");
+            }
         }
     }
 }

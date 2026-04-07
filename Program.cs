@@ -1,3 +1,3 @@
-﻿using static chesti.Utils.MainMenu;
+﻿using static chesti.Menus.MainMenu;
 
 Menu();

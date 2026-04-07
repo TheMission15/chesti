@@ -15,14 +15,18 @@ namespace chesti.Model
         {
             Name = name;
             Durability = durability;
-            Weight = Math.Clamp(weight, 5, 17);
+            Weight = weight;
             Group = group;
             Rarity = rarity;
             Element = element;
         }
-        public Item Copy()
+        public Item Copy(int r = 32)
         {
-            return new Item(Name, Durability+randInt(-10,10), Weight, Group, Rarity, Element);
+            return new Item(Name, Durability+randInt(-r,r), Weight, Group, Rarity, Element);
+        }
+        public override string ToString()
+        {
+            return $"{Name} {Weight}KG, {Durability} Drt";
         }
     }
 }

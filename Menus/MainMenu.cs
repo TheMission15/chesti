@@ -1,12 +1,11 @@
 ﻿using chesti.Model;
 using static chesti.Utils.Python;
-using static chesti.Utils.Shop;
-using static chesti.Utils.Holdings;
-using static chesti.Utils.Upgrades;
-using static chesti.Utils.Training;
+using static chesti.Menus.Shop;
+using static chesti.Menus.Holdings;
+using static chesti.Menus.Training;
 using static chesti.Utils.DataManager;
 
-namespace chesti.Utils
+namespace chesti.Menus
 {
     public static class MainMenu
     {
@@ -23,7 +22,7 @@ namespace chesti.Utils
             Player player = PlayerSaves(username);
             while (true)
             {
-                clear(); print("Esc for leave \n E for upgrades \n F for menu \n S for shop \n T for training ");
+                clear(); page("Chesti"); print(" S for shop \n F for inventory \n T for training ");
 
                 menuInput = readKey();
 
@@ -41,6 +40,7 @@ namespace chesti.Utils
                             {
                                 clear();
                                 print("Welcome to admin panel");
+                                print($"Selected Item {player.Selected}");
                                 readKey();
                             }
                         }
@@ -52,10 +52,6 @@ namespace chesti.Utils
                 }
 
                 //game loop
-                if (menuInput.Key == ConsoleKey.E)  // open chests
-                {
-                    UpgradeMenu(player);
-                }
 
                 if (menuInput.Key == ConsoleKey.S)  // shop
                 {

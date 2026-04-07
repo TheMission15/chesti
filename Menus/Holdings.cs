@@ -1,7 +1,7 @@
 ﻿using chesti.Model;
 using static chesti.Utils.Python;
 
-namespace chesti.Utils
+namespace chesti.Menus
 {
     public static class Holdings
     {
@@ -10,17 +10,12 @@ namespace chesti.Utils
         {
             while (true)
             {
-                clear();
-                print("    MENU    \n Esc for back \n K for Wallet \n I for inventory");
+                clear(); page("Holdings"); print(" K for wallet \n I for inventory");
                 holdingsInput = readKey();
-
 
                 if (holdingsInput.Key == ConsoleKey.K)
                 {
-                    clear();
-                    print($"You have \n\n Keys:{player.KeyCount} \n Gold:{player.GoldCount}");
-                    sleep(100);
-                    readKey();
+                    popUp($"You have \n\n Keys:{player.KeyCount} \n Gold:{player.GoldCount} \n Scrolls:{player.ScrollCount}");
                 }
                 if (holdingsInput.Key == ConsoleKey.I)
                 {

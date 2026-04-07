@@ -5,7 +5,7 @@ namespace chesti.Utils
 {
     public static class DataManager
     {
-        public static string folder = "C:\\Users\\raulc\\source\\repos\\chesti\\Data";
+        public static string folder = "Data";
         public static Player PlayerSaves(string username)
         {
             if (!Directory.Exists(folder))
@@ -16,12 +16,12 @@ namespace chesti.Utils
             if (File.Exists(filePath))
             {
                 string json = File.ReadAllText(filePath);
-                Player player = JsonSerializer.Deserialize<Player>(json);
+                Player player = JsonSerializer.Deserialize<Player>(json) ?? new Player(username, 0, 0, 0);
                 return player;
             }
             else
             {
-                Player newPlayer = new Player(username, 3, 30);
+                Player newPlayer = new Player(username, 3, 30, 1);
                 string json = JsonSerializer.Serialize(newPlayer, new JsonSerializerOptions { WriteIndented = true });
                 return newPlayer;
             }

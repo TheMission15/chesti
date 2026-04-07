@@ -2,7 +2,7 @@
 {
     Standard,
     New,
-    Improved,
+    //Improved,
     Elite,
 }
 public enum Element
