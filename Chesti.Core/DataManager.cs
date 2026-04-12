@@ -1,7 +1,7 @@
-﻿using chesti.Model;
+﻿using Chesti.Core.Model;
 using System.Text.Json;
 
-namespace chesti.Utils
+namespace Chesti.Core
 {
     public static class DataManager
     {
@@ -16,12 +16,12 @@ namespace chesti.Utils
             if (File.Exists(filePath))
             {
                 string json = File.ReadAllText(filePath);
-                Player player = JsonSerializer.Deserialize<Player>(json) ?? new Player(username, 0, 0, 0);
+                Player player = JsonSerializer.Deserialize<Player>(json) ?? new Player(username, new(0, 0, 0));
                 return player;
             }
             else
             {
-                Player newPlayer = new Player(username, 3, 30, 1);
+                Player newPlayer = new Player(username, new(3, 30, 1));
                 string json = JsonSerializer.Serialize(newPlayer, new JsonSerializerOptions { WriteIndented = true });
                 return newPlayer;
             }
@@ -36,6 +36,14 @@ namespace chesti.Utils
             string filePath = Path.Combine(folder, $"{player.Name}.json");
             string json = JsonSerializer.Serialize(player, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(filePath, json);
+        }
+        public static void DeletePlayer(Player player)
+        {
+            string filePath = Path.Combine(folder, $"{player.Name}.json");
+            if (!Directory.Exists(filePath))
+            {
+                Directory.Delete(filePath);
+            }
         }
     }
 }

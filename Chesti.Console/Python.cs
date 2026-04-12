@@ -1,24 +1,22 @@
-﻿using chesti.Model;
-
-namespace chesti.Utils
+﻿namespace Chesti.Console
 {
     public static class Python
     {
         public static void print(string? text)
         {
-            Console.WriteLine(text);
+            System.Console.WriteLine(text);
         }
         public static string? input(string? text)
         {
             if (text != null)
             {
-                Console.Write(text);
+                System.Console.Write(text);
             }
-            return Console.ReadLine();
+            return System.Console.ReadLine();
         }
         public static void clear()
         {
-            Console.Clear();
+            System.Console.Clear();
         }
         public static void sleep(int time)
         {
@@ -26,12 +24,7 @@ namespace chesti.Utils
         }
         public static ConsoleKeyInfo readKey()
         {
-            return Console.ReadKey(true);
-        }
-        public static int randInt(int min, int max)
-        {
-            Random r = new Random();
-            return r.Next(min, max + 1);
+            return System.Console.ReadKey(true);
         }
         public static void popUp(string text, bool clearOff = false, int sleeper = 100)
         {
@@ -45,7 +38,7 @@ namespace chesti.Utils
         }
         public static void page(string text, string extra = "")
         {
-            if (text == "Chesti")
+            if (text == "Chesti.Console")
             {
                 print($"Esc to LEAVE          {text}          {extra}\n\n");
             }
