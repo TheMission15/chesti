@@ -18,12 +18,18 @@
     }
     public enum Group // for weapons and skill effectiveness
     {
-        Gloves,
-        Sword,
-        Bow,
-        Axe,
-        Hammer,
-        Cannon,
+        Power,
+        Speed,
+        Range,
+        Close,
+        Magic,
+        Anti,
+        //Gloves,
+        //Sword,
+        //Bow,
+        //Axe,
+        //Hammer,
+        //Cannon,
     }
     public enum ShopType
     {

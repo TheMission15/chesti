@@ -1,5 +1,4 @@
 ﻿using Chesti.Core.Result;
-using System.Xml.Linq;
 using static Chesti.Core.DataManager;
 using static Chesti.Core.Methods;
 
@@ -37,9 +36,9 @@ namespace Chesti.Core.Model
                 player.Wallet.KeyCount = 0;
                 return new(false, "You dont have any keys");
             }
-            if (roll <= Odds) { Rarity++; }
+            if (roll <= Odds && Rarity != Rarity.Elite) { Rarity++; }
 
-            foreach (Item i in Catalogue.Items)
+            foreach (Item i in Catalogue.Items[(int)Rarity])
             {
                 if (i.Rarity == Rarity)
                 {

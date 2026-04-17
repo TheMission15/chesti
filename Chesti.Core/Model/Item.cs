@@ -10,7 +10,7 @@ namespace Chesti.Core.Model
         public Rarity Rarity { get; set; }
         public  Element Element { get; set; }
 
-        public Item(string name, int weight, Group?[]? group, Rarity rarity, Element element = Element.Neutral)
+        public Item(string name, int weight, Rarity rarity, Group?[]? group, Element element = Element.Neutral)
         {
             Name = name;
             Rarity = rarity;
@@ -24,7 +24,7 @@ namespace Chesti.Core.Model
         }
         public Item Copy(Element element = Element.Neutral)
         {
-            return new Item(Name, Weight, Group, Rarity, element);
+            return new Item(Name, Weight, Rarity, Group, element);
         }
         public override string ToString()
         {

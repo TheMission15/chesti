@@ -10,6 +10,7 @@ namespace Chesti.Console
         public static ConsoleKeyInfo menuInput;
         public static void Menu()
         {
+            Group[] groups = new Group[5];
             Player player = JoinGame(); //PlayerSaves("mission");//
             while (true)
             {

@@ -18,7 +18,7 @@ namespace Chesti.Core
         public Battle(Player player1, Player player2, int bestOf, int durability)
         {
             Player1 = player1; Player2 = player2;
-            Player1.Selected ??= Catalogue.Items[0].Copy(); Player2.Selected ??= Catalogue.Items[0].Copy();
+            Player1.Selected ??= Catalogue.Items[0][0].Copy(); Player2.Selected ??= Catalogue.Items[0][0].Copy();
             Turn = 0; BestOf = bestOf; Wincon = BestOf % 2 != 0 ? (BestOf / 2) + 1 : BestOf / 2; Durability = durability;
             Fighter1 = new Fighter(Durability, Player1.Selected, false); Fighter2 = new Fighter(Durability, Player2.Selected, true);
 

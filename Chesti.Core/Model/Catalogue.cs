@@ -4,6 +4,21 @@ namespace Chesti.Core.Model
 {
     public static class Catalogue
     {
+
+        public static void LoadItems()
+        {
+
+        }
+        public static void ReloadItems()
+        {
+            Items[0] = new List<Item> { };
+            Items[1] = new List<Item> { };
+            Items[2] = new List<Item> { };
+            Items[3] = new List<Item> { };
+
+            LoadItems();
+        }
+
         public static Skill RandomSkill()
         {
             int r = randInt(0, Skills.Count - 1);
@@ -11,8 +26,8 @@ namespace Chesti.Core.Model
         }
         public static Item RandomItem()
         {
-            int r = randInt(0, Items.Count - 1);
-            return Items[r].Copy();
+            int r = randInt(0, Items[0].Count - 1);
+            return Items[0][r].Copy();
         }
         public static Chest GiveChest(Rarity rarity, Element element = (Element)0)
         {
@@ -41,10 +56,16 @@ namespace Chesti.Core.Model
             new("Crank", 17, 7),
             new("Slap", 5, -2),
         ];
-        public static List<Item> Items { get; } =
+        public static Group?[] groups = new Group?[2];
+        public static List<Item>[] Items { get; } =
         [
+            new List<Item> { },
 
+            new List<Item> { },
 
+            new List<Item> { },
+
+            new List<Item> { }
             //new("Gloves", 2000, 5, Group.Gloves, Rarity.Standard),
             //new("Weights", 2200, 8, Group.Gloves, Rarity.Standard),
             //new("Sword", 2650, 9, Group.Sword, Rarity.Standard),

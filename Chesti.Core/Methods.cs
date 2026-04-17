@@ -47,24 +47,24 @@ namespace Chesti.Core
         {
             if (npc.Inventory.Count == 0)
             {
-                npc.Inventory.Add(Catalogue.Items[0].Copy());
+                npc.Inventory.Add(Catalogue.Items[0][0].Copy());
             }
             int r = randInt(1, 3);
             if (r == 1)
             {
-                npc.Inventory[0] = Catalogue.Items[2].Copy();
+                npc.Inventory[0] = Catalogue.Items[0][2].Copy();
                 npc.SetSelected(0);
                 npc.Skills = [Catalogue.Skills[1], Catalogue.Skills[2], Catalogue.Skills[0]];
             }
             if (r == 2)
             {
-                npc.Inventory[0] = Catalogue.Items[5].Copy();
+                npc.Inventory[0] = Catalogue.Items[0][5].Copy();
                 npc.SetSelected(0);
                 npc.Skills = [Catalogue.Skills[5], Catalogue.Skills[2], Catalogue.Skills[4]];
             }
             if (r == 3)
             {
-                npc.Inventory[0] = Catalogue.Items[7].Copy();
+                npc.Inventory[0] = Catalogue.Items[0][7].Copy();
                 npc.SetSelected(0);
                 npc.Skills = [Catalogue.Skills[5], Catalogue.Skills[3], Catalogue.Skills[6]];
             }
