@@ -1,4 +1,5 @@
 ﻿using Chesti.Core.Model;
+using static Chesti.Core.DataManager;
 
 namespace ItemAdder.Add_Pages
 {
@@ -33,9 +34,10 @@ namespace ItemAdder.Add_Pages
                     groups[i] = (Group)GroupList.CheckedIndices[i];
                 }
                 label1.Text = $"{ItmName}, {InRarity}, {ItmWeight}, {groups[0]} {groups[1]}";
+                Item item = new(ItmName, ItmWeight, (Rarity)InRarity!, groups);
+                AddItem(item);
             }
             else { label1.Text = "WRONG"; }
-            
         }
 
         private void GroupList_SelectedIndexChanged(object sender, EventArgs e)

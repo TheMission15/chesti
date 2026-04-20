@@ -11,7 +11,7 @@ namespace Chesti.Console
     {
         public static void Test(Player player)
         {
-            player.Selected = Catalogue.Items[1].Copy();
+            player.Selected = Catalogue.Items[0][0].Copy();
             print($"{player.Selected}");
             player.SetSelected(2);
             print($"{player.Selected}");readKey();

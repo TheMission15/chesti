@@ -1,21 +1,23 @@
 ﻿using Chesti.Core.Model;
+using System.Numerics;
 using System.Text.Json;
 
 namespace Chesti.Core
 {
     public static class DataManager
     {
-        public static string folder = "Data";
+        public static string BasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Chesti");
         public static Player PlayerSaves(string username)
         {
-            if (!Directory.Exists(folder))
+            string path = Path.Combine(BasePath, "Data");
+            if (!Directory.Exists(path))
             {
-                Directory.CreateDirectory(folder);
+                Directory.CreateDirectory(path);
             }
-            string filePath = Path.Combine(folder, $"{username}.json");
-            if (File.Exists(filePath))
+            path = Path.Combine(path, $"{username}.json");
+            if (File.Exists(path))
             {
-                string json = File.ReadAllText(filePath);
+                string json = File.ReadAllText(path);
                 Player player = JsonSerializer.Deserialize<Player>(json) ?? new Player(username, new(0, 0, 0));
                 return player;
             }
@@ -29,21 +31,57 @@ namespace Chesti.Core
 
         public static void SavePlayer(Player player)
         {
-            if (!Directory.Exists(folder))
+            string path = Path.Combine(BasePath, "Data");
+            if (!Directory.Exists(path))
             {
-                Directory.CreateDirectory(folder);
+                Directory.CreateDirectory(path);
             }
-            string filePath = Path.Combine(folder, $"{player.Name}.json");
-            string json = JsonSerializer.Serialize(player, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText(filePath, json);
+            path = Path.Combine(path, $"{player.Name}.json");
+            string jsonData = JsonSerializer.Serialize(player, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(path, jsonData);
         }
         public static void DeletePlayer(Player player)
         {
-            string filePath = Path.Combine(folder, $"{player.Name}.json");
-            if (!Directory.Exists(filePath))
+            string path = Path.Combine(BasePath, "Data");
+            path = Path.Combine(path, $"{player.Name}.json");
+            if (!Directory.Exists(path))
             {
-                Directory.Delete(filePath);
+                Directory.Delete(path);
             }
+        }
+        public static List<Item> LoadItem(Rarity rarity)
+        {
+            string path = Path.Combine(BasePath, "Data");
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            path = Path.Combine(path, $"{rarity}.json");
+            if (File.Exists(path))
+            {
+                string json = File.ReadAllText(path);
+                List<Item> item = JsonSerializer.Deserialize<List<Item>>(json) ?? new();
+                return item;
+            }
+            else
+            {
+                List<Item> item = [];
+                string json = JsonSerializer.Serialize(item, new JsonSerializerOptions { WriteIndented = true });
+                return item;
+            }
+        }
+        public static void AddItem(Item item)
+        {
+            string path = Path.Combine(BasePath, "Catalouge");
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            List<Item> items = LoadItem(item.Rarity);
+            items.Add(item);
+            path = Path.Combine(path, $"{item.Rarity}.json");
+            string jsonData = JsonSerializer.Serialize(items, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(path, jsonData);
         }
     }
 }

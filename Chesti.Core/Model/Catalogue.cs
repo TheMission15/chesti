@@ -1,4 +1,5 @@
 ﻿using static Chesti.Core.Methods;
+using static Chesti.Core.DataManager;
 
 namespace Chesti.Core.Model
 {
@@ -7,14 +8,17 @@ namespace Chesti.Core.Model
 
         public static void LoadItems()
         {
-
+            Items[0] = LoadItem(0);
+            Items[1] = LoadItem((Rarity)1);
+            Items[2] = LoadItem((Rarity)2);
+            Items[3] = LoadItem((Rarity)3);
         }
         public static void ReloadItems()
         {
-            Items[0] = new List<Item> { };
-            Items[1] = new List<Item> { };
-            Items[2] = new List<Item> { };
-            Items[3] = new List<Item> { };
+            Items[0] = [];
+            Items[1] = [];
+            Items[2] = [];
+            Items[3] = [];
 
             LoadItems();
         }

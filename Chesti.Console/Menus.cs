@@ -2,14 +2,16 @@
 using static Chesti.Console.Methods;
 using static Chesti.Console.Python;
 using static Chesti.Core.DataManager;
+using static Chesti.Core.Model.Catalogue;
 
 namespace Chesti.Console
 {
     public static class Menus
     {
-        public static ConsoleKeyInfo menuInput;
         public static void Menu()
         {
+            LoadItems();
+            ConsoleKeyInfo menuInput;
             Group[] groups = new Group[5];
             Player player = JoinGame(); //PlayerSaves("mission");//
             while (true)
@@ -49,6 +51,7 @@ namespace Chesti.Console
         }
         public static void InventoryMenu(Player player)
         {
+            ConsoleKeyInfo menuInput;
             var book = Write(player);
             while (true)
             {
@@ -62,6 +65,7 @@ namespace Chesti.Console
         }
         public static void ShopMenu(Player player)
         {
+            ConsoleKeyInfo menuInput;
             while (true)
             {
                 clear(); page("Shop", $"Keys: {player.Wallet.KeyCount}, Scrolls: {player.Wallet.ScrollCount}");
@@ -77,6 +81,7 @@ namespace Chesti.Console
         }
         public static void TrainingMenu(Player player)
         {
+            ConsoleKeyInfo menuInput;
             if (player.Selected != null && player.Selected.Durability <= 0){ player.DeleteItem(); }
             var book = Write(player);
             while (true)
@@ -92,6 +97,7 @@ namespace Chesti.Console
         }
         public static void KeyMenu(Player player)
         {
+            ConsoleKeyInfo menuInput;
             var keys = ShopType.Keys;
             while (true)
             {
@@ -107,6 +113,7 @@ namespace Chesti.Console
         } // end of KeyMenu
         public static void ScrollMenu(Player player)
         {
+            ConsoleKeyInfo menuInput;
             var scrolls = ShopType.Scrolls;
             while (true)
             {
