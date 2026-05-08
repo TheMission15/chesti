@@ -6,17 +6,19 @@ namespace Chesti.Core.Model
     {
         public string Name { get; set; }
         public Wallet Wallet { get; set; }
-        public Item? Selected { get; set; }
-        public int? SelectedIndex { get; set; }
-        public Skill?[] Skills { get; set; }
-        public List<Item> Inventory { get; set; }
+        public int SelectedTool { get; set; }
+        public Charm?[] ActiveCharms { get; set; }
+        public List<Charm> Charms { get; set; }
+        public List<Tool> Tools { get; set; }
         //public List<Chest> ChestStorage { get; set; }
 
         public Player(string name, Wallet wallet)
         {
             Name = name; Wallet = wallet;
-            Skills = new Skill?[3];
-            Inventory = [];
+            SelectedTool = -1;
+            ActiveCharms = new Charm?[3];
+            Charms = [];
+            Tools = [];
             //ChestStorage = [Catalogue.GiveChest((Rarity)0)];
         }
         public void dealDamage(int damage)

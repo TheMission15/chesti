@@ -10,13 +10,12 @@ namespace Chesti.Console
     {
         public static void Menu()
         {
+            Player player = JoinGame(); //PlayerSaves("mission");//
             LoadItems();
             ConsoleKeyInfo menuInput;
-            Group[] groups = new Group[5];
-            Player player = JoinGame(); //PlayerSaves("mission");//
             while (true)
             {
-                clear(); page("Chesti.Console", $"Hello {player.Name}"); print(" S for shop \n F for inventory \n T for training ");
+                clear(); page("Chesti.Console", $"Hello {player.Name}, W. Wallet"); print(" T. Training \n F. Food Stand \n S. Smith \n C. Charms \n //station & cloths");
 
                 menuInput = readKey();
 
@@ -25,106 +24,71 @@ namespace Chesti.Console
                 {
                     break;
                 }
-
-                if (menuInput.Key == ConsoleKey.S)  // shop
+                if (menuInput.Key == ConsoleKey.T) // --- Training ---
                 {
-                    ShopMenu(player);
+                    //TrainingMenu(player);
+                    popUp("uhhh, dont wanna fix this yet so\n\nTRAINING MENU");
                 }
-
-                if (menuInput.Key == ConsoleKey.F) // holdings
+                if (menuInput.Key == ConsoleKey.F) // --- Food Stand ---
                 {
-                    InventoryMenu(player);
+                    popUp("yum yum, did u hear that this feature isnt out yet");
                 }
-
-                if (menuInput.Key == ConsoleKey.T) // training
+                if (menuInput.Key == ConsoleKey.S)  // --- Smithing ---
                 {
-                    TrainingMenu(player);
+                    SmithingMenu(player);
                 }
-                if (menuInput.Key == ConsoleKey.C)
+                if (menuInput.Key == ConsoleKey.C) // --- Charm Maker ---
                 {
-                    Test(player);
+                    CharmsMenu(player);
+                }
+                if (menuInput.Key == ConsoleKey.W) // --- Wallet ---
+                {
+                    popUp(player.Wallet.ToString());
                 }
             }
             clear();
             SavePlayer(player);
-            print("Cya");
+            popUp("Cya");
         }
-        public static void InventoryMenu(Player player)
+        public static void CharmsMenu(Player player)
         {
             ConsoleKeyInfo menuInput;
-            var book = Write(player);
             while (true)
             {
-                clear(); page("Holdings"); print(" K for Back Pocket \n I for Items");
+                clear(); page("Shop", $"Scales: {player.Wallet.Scales[0]}");
+                print(" C. Charm");
                 menuInput = readKey();
-
-                if (menuInput.Key == ConsoleKey.K) { Wallet(player); }
-                if (menuInput.Key == ConsoleKey.I) { ViewItems(book, player); }
                 if (menuInput.Key == ConsoleKey.Escape) { break; }
+                if (menuInput.Key == ConsoleKey.C) { GiveCharm(player); }
             }
         }
-        public static void ShopMenu(Player player)
+        public static void SmithingMenu(Player player)
         {
             ConsoleKeyInfo menuInput;
             while (true)
             {
-                clear(); page("Shop", $"Keys: {player.Wallet.KeyCount}, Scrolls: {player.Wallet.ScrollCount}");
-                print(" C for Chest \n S for Skills \n K for keys \n J for scrolls");
+                clear(); page("Shop", $"Scales: {player.Wallet.Scales[0]}");
+                print(" T. New Tool");
                 menuInput = readKey();
-
                 if (menuInput.Key == ConsoleKey.Escape) { break; }
-                if (menuInput.Key == ConsoleKey.C) { OpenChest(player); }
-                if (menuInput.Key == ConsoleKey.S) { GiveSkill(player); }
-                if (menuInput.Key == ConsoleKey.K) { KeyMenu(player); }
-                if (menuInput.Key == ConsoleKey.J) { ScrollMenu(player); }
+                if (menuInput.Key == ConsoleKey.T) { OpenChest(player); }
             }
         }
         public static void TrainingMenu(Player player)
         {
-            ConsoleKeyInfo menuInput;
-            if (player.Selected != null && player.Selected.Durability <= 0){ player.DeleteItem(); }
-            var book = Write(player);
-            while (true)
-            {
-                var unlock = BattleLock(player);
-                clear(); page("Training"); print(unlock.Message);
-                menuInput = readKey();
+            //ConsoleKeyInfo menuInput;
+            //if (player.Selected != null && player.Selected.Durability <= 0){ player.DeleteItem(); }
+            //var book = Write(player);
+            //while (true)
+            //{
+            //    var unlock = BattleLock(player);
+            //    clear(); page("Training"); print(unlock.Message);
+            //    menuInput = readKey();
 
-                if (menuInput.Key == ConsoleKey.Escape){ break; }
-                if (menuInput.Key == ConsoleKey.S){ ViewItems(book, player, true); }
-                if (menuInput.Key == ConsoleKey.B && player.Selected != null){ VerifyBattle(player, unlock.Result); }
-            }
+            //    if (menuInput.Key == ConsoleKey.Escape){ break; }
+            //    if (menuInput.Key == ConsoleKey.S){ ViewItems(book, player, true); }
+            //    if (menuInput.Key == ConsoleKey.B && player.Selected != null){ VerifyBattle(player, unlock.Result); }
+            //}
         }
-        public static void KeyMenu(Player player)
-        {
-            ConsoleKeyInfo menuInput;
-            var keys = ShopType.Keys;
-            while (true)
-            {
-                clear(); page("Scroll Shop", $"Gold:{player.Wallet.GoldCount}");
-                print($" Esc for back \n 1. 10 coins = 3 keys \n 2. 20 coins = 8 keys \n 3. 50 coins = 26 keys");
-                menuInput = readKey();
-
-                if (menuInput.Key == ConsoleKey.Escape) { break; }
-                if (menuInput.Key == ConsoleKey.D1) { BuyItem(player, 10, 3, keys); }
-                if (menuInput.Key == ConsoleKey.D2) { BuyItem(player, 20, 8, keys); }
-                if (menuInput.Key == ConsoleKey.D3) { BuyItem(player, 50, 26, keys); }
-            }
-        } // end of KeyMenu
-        public static void ScrollMenu(Player player)
-        {
-            ConsoleKeyInfo menuInput;
-            var scrolls = ShopType.Scrolls;
-            while (true)
-            {
-                clear(); page("Scroll Shop", $"Gold:{player.Wallet.GoldCount}");
-                print($" Esc for back \n 1. 30 coins = 1 Scroll \n 2. 100 coins = 5 Scrolls");
-                menuInput = readKey();
-
-                if (menuInput.Key == ConsoleKey.Escape) { break; }
-                if (menuInput.Key == ConsoleKey.D1) { BuyItem(player, 30, 1, scrolls); }
-                if (menuInput.Key == ConsoleKey.D2) { BuyItem(player, 100, 5, scrolls); }
-            }
-        } // end of KeyMenu
     }
 }

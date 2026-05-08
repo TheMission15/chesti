@@ -6,7 +6,7 @@ namespace Chesti.Core.Model
     {
         public string Name { get; set; }
         public int Weight { get; set; }
-        public Group[] Group { get; set; }
+        public List<Group> Group { get; set; }
         public double Durability { get; set; }
         public Element Element { get; set; }
 

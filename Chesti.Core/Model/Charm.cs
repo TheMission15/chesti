@@ -8,11 +8,11 @@ namespace Chesti.Core.Model
         public int Speed { get; set; }
         public Group Group { get; set; }
         public Element Element { get; set; }
-        public Residue Stats { get; set; }
+        public Residue Build { get; set; }
         public Charm(Skill reference)
         {
             Name = reference.Name; Power = reference.Power; Speed = reference.Speed; Element = reference.Element;
-            Stats = new();
+            Build = new();
             Group = ChooseGroup(reference);
         }
         public override string ToString()

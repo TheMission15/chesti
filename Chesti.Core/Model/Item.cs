@@ -4,9 +4,9 @@
     {
         public string Name { get; set; }
         public int Weight { get; set; }
-        public Group[] Group { get; set; }
+        public List<Group> Group { get; set; }
         public Rarity Rarity { get; set; }
-        public Item(string name, int weight, Rarity rarity, Group[] group, Element element = Element.Neutral)
+        public Item(string name, int weight, Rarity rarity, List<Group> group, Element element = Element.Neutral)
         {
             Name = name;
             Rarity = rarity;

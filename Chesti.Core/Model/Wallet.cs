@@ -12,33 +12,9 @@ namespace Chesti.Core.Model
             Scales[0] = scales;
             Fragments = 0;
         }
-        public StringResult BuyKeys(int price, int amount)
+        public override string ToString()
         {
-            if (GoldCount >= price)
-            {
-                GoldCount -= price;
-                KeyCount += amount;
-                return new(true, $"\n Keys:{KeyCount}\n Gold:{GoldCount}");
-            }
-            else
-            {
-                return new(false, "You dont have enough gold");
-            }
-        } // end of BuyKeys
-
-        public StringResult BuyScrolls(int price, int amount)
-        {
-            if (GoldCount >= price)
-            {
-                GoldCount -= price;
-                ScrollCount += amount;
-                return new(true, $"\n Scrolls:{ScrollCount}\n Gold:{GoldCount}");
-            }
-            else
-            {
-                return new(false, "You dont have enough gold");
-
-            }
-        } // end of BuyKeys
+            return $" Scales: {Scales[0]} \n Fragments: {Fragments}";
+        }
     }
 }
