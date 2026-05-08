@@ -4,18 +4,13 @@ namespace Chesti.Core.Model
 {
     public class Wallet
     {
-        public int KeyCount { get; set; }
-        public int GoldCount { get; set; }
-        public int ScrollCount { get; set; }
+        public int[] Scales { get; set; }
         public int Fragments { get; set; }
-        public int Essence { get; set; }
-        public Wallet(int keyCount, int goldCount, int scrollCount)
+        public Wallet(int scales)
         {
-            KeyCount = keyCount;
-            GoldCount = goldCount;
-            ScrollCount = scrollCount;
+            Scales = new int[7];
+            Scales[0] = scales;
             Fragments = 0;
-            Essence = 0;
         }
         public StringResult BuyKeys(int price, int amount)
         {

@@ -27,8 +27,8 @@ namespace Chesti.Core.Model
             return new(Rarity, element);
         }
         public StringResult OpenChest(Player player)
-        {
-            List<Item> items = [];
+        {;
+            Catalogue.LoadItems();
             int roll = randInt(1,100);
 
             if (player.Wallet.KeyCount <= 0)
@@ -36,24 +36,19 @@ namespace Chesti.Core.Model
                 player.Wallet.KeyCount = 0;
                 return new(false, "You dont have any keys");
             }
-            if (roll <= Odds && Rarity != Rarity.Elite) { Rarity++; }
+            //if (roll <= Odds && Rarity != Rarity.Elite) { Rarity++; }
 
-            foreach (Item i in Catalogue.Items[(int)Rarity])
+            if (Catalogue.Items[(int)Rarity].Count > 0)
             {
-                if (i.Rarity == Rarity)
-                {
-                    items.Add(i);
-                }
-            }
-            if (items.Count != 0)
-            {
-                roll = randInt(1, items.Count);
-                Item item = items[roll-1];
+                roll = randInt(1, Catalogue.Items[(int)Rarity].Count);
+                Item item = Catalogue.Items[(int)Rarity][roll - 1];
                 player.Inventory.Add(item);
+                player.Wallet.KeyCount--;
                 SavePlayer(player);
                 return new(true, $"{item.Name}, {item.Durability}, {item.Rarity}");
             }
-            return new(false, "Error");
+            else { return new(false, "error"); }
+
         } // end of OpenChest
     }
 }

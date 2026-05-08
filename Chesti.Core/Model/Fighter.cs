@@ -52,7 +52,7 @@ namespace Chesti.Core.Model
                 }
 
 
-                Damage = (int)(Tool.Weight * SkillUsed.Damage * (random / 100.0));
+                Damage = (int)(Tool.Weight^0.8 * SkillUsed.Damage * (random / 100.0));
             }
         } // end of CalculateDamage()
         public void CalculateTurn(int turn)

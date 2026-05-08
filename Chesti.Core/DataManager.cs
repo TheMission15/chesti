@@ -1,5 +1,4 @@
 ﻿using Chesti.Core.Model;
-using System.Numerics;
 using System.Text.Json;
 
 namespace Chesti.Core
@@ -7,6 +6,7 @@ namespace Chesti.Core
     public static class DataManager
     {
         public static string BasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Chesti");
+        public static string Folder = "C:\\Users\\raulc\\source\\repos\\Chesti\\Chesti.Core\\Catalogue";
         public static Player PlayerSaves(string username)
         {
             string path = Path.Combine(BasePath, "Data");
@@ -51,7 +51,7 @@ namespace Chesti.Core
         }
         public static List<Item> LoadItem(Rarity rarity)
         {
-            string path = Path.Combine(BasePath, "Data");
+            string path = Folder;
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
@@ -72,7 +72,7 @@ namespace Chesti.Core
         }
         public static void AddItem(Item item)
         {
-            string path = Path.Combine(BasePath, "Catalouge");
+            string path = Folder;
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);

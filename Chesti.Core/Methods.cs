@@ -107,5 +107,19 @@ namespace Chesti.Core
             }
             return dura;
         }
+        public static Group ChooseGroup(Skill skill)
+        {
+            int count = skill.Secondary.Count;
+            int r = randInt(1, 2);
+            if (r == 2 && count > 0)
+            {
+                r = randInt(0, count - 1);
+                return skill.Secondary[r];
+            }
+            else
+            {
+                return skill.Main;
+            }
+        }
     }
 }

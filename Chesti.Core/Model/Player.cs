@@ -10,14 +10,14 @@ namespace Chesti.Core.Model
         public int? SelectedIndex { get; set; }
         public Skill?[] Skills { get; set; }
         public List<Item> Inventory { get; set; }
-        public List<Chest> ChestStorage { get; set; }
+        //public List<Chest> ChestStorage { get; set; }
 
         public Player(string name, Wallet wallet)
         {
             Name = name; Wallet = wallet;
             Skills = new Skill?[3];
             Inventory = [];
-            ChestStorage = [Catalogue.GiveChest((Rarity)0)];
+            //ChestStorage = [Catalogue.GiveChest((Rarity)0)];
         }
         public void dealDamage(int damage)
         {

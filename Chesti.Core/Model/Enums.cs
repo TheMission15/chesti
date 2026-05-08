@@ -18,6 +18,7 @@
     }
     public enum Group // for weapons and skill effectiveness
     {
+        Freestyle,
         Power,
         Speed,
         Range,
