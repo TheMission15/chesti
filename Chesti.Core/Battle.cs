@@ -12,15 +12,14 @@ namespace Chesti.Core
         public Fighter Fighter2 { get; set; }
         public RoundResult Result { get; set; }
         public int Turn { get; set; }
-        public int BestOf { get; set; } // 
+        public int BestOf { get; set; } // Bellow are numbers for battle durations
         public int Wincon { get; set; } // 1600, 3400, 7200, 15000, 30000
         public int Durability { get; set; } // 300 - 500 400, 700 - 1000 850, 1400 - 1800 1600, 2400 - 2900 2650, 10,000
-        public Battle(Player player1, Player player2, int bestOf, int durability)
+        public Battle(Player player1, Player player2, int bestOf, int durability, bool versus)
         {
             Player1 = player1; Player2 = player2;
-            Player1.Selected ??= Catalogue.Items[0][0].Copy(); Player2.Selected ??= Catalogue.Items[0][0].Copy();
             Turn = 0; BestOf = bestOf; Wincon = BestOf % 2 != 0 ? (BestOf / 2) + 1 : BestOf / 2; Durability = durability;
-            Fighter1 = new Fighter(Durability, Player1.Selected, false); Fighter2 = new Fighter(Durability, Player2.Selected, true);
+            Fighter1 = new Fighter(Durability, Player1.Tools[Player1.SelectedTool], false); Fighter2 = new Fighter(Durability, Player2.Tools[Player2.SelectedTool], !versus);
 
             Result = new(true, false, false, false, false, false, false, false);
         }
@@ -60,10 +59,10 @@ namespace Chesti.Core
         }
         public string NewRound()
         {
-            if (Player1.Selected != null && Player2.Selected != null)
+            if (Player1.SelectedTool != -1 && Player2.SelectedTool != -1)
             {
-                Fighter1.Reset(Durability, Player1.Selected);
-                Fighter2.Reset(Durability, Player2.Selected);
+                Fighter1.Reset(Durability, Player1.Tools[Player1.SelectedTool]);
+                Fighter2.Reset(Durability, Player2.Tools[Player2.SelectedTool]);
                 Result.Active = true;
                 return "New Round";
             }
@@ -113,7 +112,6 @@ namespace Chesti.Core
             if (Result.Player1Break) { message += "Player 1 Broke tool\n\n"; }
             if (Result.Player2Break) { message += "Player 2 Broke tool\n\n"; }
             return message + "Saved Player";
-
         }
     }
 }

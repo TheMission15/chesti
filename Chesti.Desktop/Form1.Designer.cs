@@ -115,7 +115,6 @@
         private Button button1;
         private ImageList imageList1;
         private PictureBox pictureBox1;
-        private Image image;
         private Label label2;
     }
 }

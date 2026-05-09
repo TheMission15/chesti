@@ -8,7 +8,7 @@ namespace ItemAdder.Add_Pages
         public bool AllowSubmit = false;
         public string ItmName = "";
         public int ItmWeight = 0;
-        public Group?[] groups = new Group?[2];
+        public List<Group> groups = [];
         public Rarity? InRarity = null;
         
         public AddItemMenu()
@@ -31,7 +31,7 @@ namespace ItemAdder.Add_Pages
             {
                 for (int i = 0; i < GroupList.CheckedItems.Count; i++)
                 {
-                    groups[i] = (Group)GroupList.CheckedIndices[i];
+                    groups.Append((Group)GroupList.CheckedIndices[i]);
                 }
                 label1.Text = $"{ItmName}, {InRarity}, {ItmWeight}, {groups[0]} {groups[1]}";
                 Item item = new(ItmName, ItmWeight, (Rarity)InRarity!, groups);

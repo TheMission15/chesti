@@ -11,10 +11,10 @@ namespace Chesti.Core.Model
         public int Wait {  get; set; }
         public int Damage { get; set; }
         public bool Select { get; set; }
-        public Item Tool { get; set; }
-        public Skill? SkillUsed {  get; set; }
+        public Tool Tool { get; set; }
+        public Charm? SkillUsed {  get; set; }
 
-        public Fighter(double durability, Item tool, bool isNPC)
+        public Fighter(double durability, Tool tool, bool isNPC)
         {
             Durability = (tool.Durability < durability) ? tool.Durability : durability;
             RoundsWon = 0;
@@ -27,7 +27,7 @@ namespace Chesti.Core.Model
         }
         public void Win() { RoundWinner = true; RoundsWon++; } // end of Win()
 
-        public void Reset(double durability, Item tool)
+        public void Reset(double durability, Tool tool)
         {
             Tool = tool;
             Durability = (Tool.Durability < durability) ? Tool.Durability : durability;
@@ -41,29 +41,41 @@ namespace Chesti.Core.Model
             if (SkillUsed != null)
             {
                 int random = randInt(1, 1000);
-                if (random <= SkillUsed.Stats.CritChance)
+                double synergy = 1;
+                if (!Tool.Group.Contains(Group.Freestyle))
                 {
-                    Damage = Convert.ToInt32(Tool.Weight * SkillUsed.Damage);
+                    if (Tool.Group.Contains(SkillUsed.Group))
+                    {
+                        synergy += 0.18;
+                    }
+                    else
+                    {
+                        synergy -= 0.18;
+                    }
+                    if (Tool.Group.Contains(Group.Speed))
+                    {
+                        synergy += 0.08;
+                    }
+                }
+                if (random <= SkillUsed.Build.CritChance) 
+                {
+                    Damage = Convert.ToInt32(Tool.Weight * SkillUsed.Power);
                     return;
                 }
                 else
                 {
-                    random = randInt(SkillUsed.Stats.Max - SkillUsed.Stats.Range, SkillUsed.Stats.Max);
+                    random = randInt(SkillUsed.Build.Min + (SkillUsed.Build.Max/2), SkillUsed.Build.Max);
                 }
 
 
-                Damage = (int)(Tool.Weight^0.8 * SkillUsed.Damage * (random / 100.0));
+                Damage = (int)(Math.Pow(Tool.Weight,0.8) * SkillUsed.Power * (random / 1000.0) * synergy);
             }
         } // end of CalculateDamage()
         public void CalculateTurn(int turn)
         {
             if (SkillUsed != null)
             {
-                Wait = Tool.Weight + (SkillUsed.Damage / SkillUsed.Speed);
-                if (Wait < 0)
-                {
-                    Wait = 0;
-                }
+                Wait = Tool.Weight + (SkillUsed.Power / SkillUsed.Speed);
             }
             Wait = turn + Wait;
         } // end of CalculateTurn()
@@ -71,6 +83,7 @@ namespace Chesti.Core.Model
         {
             bool result = false;
             if (valid) { return true; }
+            
             if (Select)
             {
                 result = IsNPC == false ? SelectSkill(player, k) : SelectSkill(player);
@@ -92,7 +105,7 @@ namespace Chesti.Core.Model
             if (key >= ConsoleKey.D1 && key <= ConsoleKey.D3)
             {
                 int index = (key - ConsoleKey.D0) - 1;
-                SkillUsed = player.Skills[index];
+                SkillUsed = player.Charms[player.ActiveCharms[index]];
 
                 if (SkillUsed != null)
                 {
@@ -104,7 +117,7 @@ namespace Chesti.Core.Model
         public bool SelectSkill(Player player)
         {
             int index = randInt(0, 2);
-            SkillUsed = player.Skills[index];
+            SkillUsed = player.Charms[player.ActiveCharms[index]];
 
             if (SkillUsed != null)
             {

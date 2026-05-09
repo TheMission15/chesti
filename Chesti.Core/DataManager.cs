@@ -18,12 +18,12 @@ namespace Chesti.Core
             if (File.Exists(path))
             {
                 string json = File.ReadAllText(path);
-                Player player = JsonSerializer.Deserialize<Player>(json) ?? new Player(username, new(0, 0, 0));
+                Player player = JsonSerializer.Deserialize<Player>(json) ?? new Player(username, new(0));
                 return player;
             }
             else
             {
-                Player newPlayer = new Player(username, new(3, 30, 1));
+                Player newPlayer = new Player(username, new(100));
                 string json = JsonSerializer.Serialize(newPlayer, new JsonSerializerOptions { WriteIndented = true });
                 return newPlayer;
             }

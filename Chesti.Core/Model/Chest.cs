@@ -26,26 +26,20 @@ namespace Chesti.Core.Model
         {
             return new(Rarity, element);
         }
-        public StringResult OpenChest(Player player)
+        public StringResult OpenChest(Player player, Element element = Element.Neutral)
         {;
             Catalogue.LoadItems();
             int roll = randInt(1,100);
 
-            if (player.Wallet.KeyCount <= 0)
-            {
-                player.Wallet.KeyCount = 0;
-                return new(false, "You dont have any keys");
-            }
             //if (roll <= Odds && Rarity != Rarity.Elite) { Rarity++; }
 
             if (Catalogue.Items[(int)Rarity].Count > 0)
             {
                 roll = randInt(1, Catalogue.Items[(int)Rarity].Count);
                 Item item = Catalogue.Items[(int)Rarity][roll - 1];
-                player.Inventory.Add(item);
-                player.Wallet.KeyCount--;
+                player.Tools.Add(new(item, element));
                 SavePlayer(player);
-                return new(true, $"{item.Name}, {item.Durability}, {item.Rarity}");
+                return new(true, $"{item.Name}, {player.Tools[^1].Durability}, {item.Rarity}");
             }
             else { return new(false, "error"); }
 

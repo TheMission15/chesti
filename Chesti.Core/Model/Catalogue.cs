@@ -25,13 +25,17 @@ namespace Chesti.Core.Model
 
         public static Skill RandomSkill()
         {
+            if (Skills.Count != 0 )
+            {
             int r = randInt(0, Skills.Count - 1);
-            return Skills[r].Copy();
+            return Skills[r];
+            }
+            else return new("", 0, 0, Group.Freestyle, [], Element.Neutral);
         }
         public static Item RandomItem()
         {
             int r = randInt(0, Items[0].Count - 1);
-            return Items[0][r].Copy();
+            return Items[0][r];
         }
         public static Chest GiveChest(Rarity rarity, Element element = (Element)0)
         {
@@ -51,14 +55,6 @@ namespace Chesti.Core.Model
 
         public static List<Skill> Skills { get; } =
         [
-            new("Punch", 10,-10),
-            new("Slash", 13, 9),
-            new("Swing", 16, 6),
-            new("Squash", 20, 3),
-            new("Shoot", 7, -3),
-            new("Bash", 18, 6),
-            new("Crank", 17, 7),
-            new("Slap", 5, -2),
         ];
         public static Group?[] groups = new Group?[2];
         public static List<Item>[] Items { get; } =

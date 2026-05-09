@@ -4,16 +4,16 @@ namespace Chesti.Core
 {
     public static class Methods
     {
-        public static string ListSkills(Player player)
+        public static string ListCharms(Player player)
         {
             string result = String.Empty;
             int i = 0;
-            foreach (Skill? skill in player.Skills)
+            foreach (int charm in player.ActiveCharms)
             {
                 i++;
-                if (skill != null)
+                if (charm != -1)
                 {
-                    result += $"{i}. {skill}\n";
+                    result += $"{i}. {player.Charms[charm]}\n";
                 }
                 else
                 {
@@ -21,53 +21,27 @@ namespace Chesti.Core
                 }
             } return result;
         } // end of ListSkills
-        public static AcquireSkillResult AcquireSkill(Player player)
+        public static AcquireCharmResult AcquireCharm(Player player)
         {
-            AcquireSkillResult result = new(false, "", Catalogue.RandomSkill(), false);
-            if (player.Wallet.ScrollCount <= 0)
+            AcquireCharmResult result = new(false, "", Catalogue.RandomSkill(), false);
+            
+            result.Result = true;
+            result.Message += $"Skill aquired {result.Charm}\n";
+            result.Message += ListCharms(player);
+            if (player.ActiveCharms.All(x => x != -1))
             {
-                result.Message = "You dont have any scrolls";
-                player.Wallet.ScrollCount = 0;
+                result.Droppable = true;
+                result.Message += "D to not equip\n";
             }
-            else
-            {
-                result.Result = true;
-                player.Wallet.ScrollCount--;
-                result.Message += $"Skill aquired {result.Skill}\n";
-                result.Message += ListSkills(player);
-                if (player.Skills.All(x => x != null))
-                {
-                    result.Droppable = true;
-                    result.Message += "D to drop\n";
-                }
-            }
+            
             return result;
         }
         public static Player NPC(Player npc)
         {
-            if (npc.Inventory.Count == 0)
-            {
-                npc.Inventory.Add(Catalogue.Items[0][0].Copy());
-            }
-            int r = randInt(1, 3);
-            if (r == 1)
-            {
-                npc.Inventory[0] = Catalogue.Items[0][2].Copy();
-                npc.SetSelected(0);
-                npc.Skills = [Catalogue.Skills[1], Catalogue.Skills[2], Catalogue.Skills[0]];
-            }
-            if (r == 2)
-            {
-                npc.Inventory[0] = Catalogue.Items[0][5].Copy();
-                npc.SetSelected(0);
-                npc.Skills = [Catalogue.Skills[5], Catalogue.Skills[2], Catalogue.Skills[4]];
-            }
-            if (r == 3)
-            {
-                npc.Inventory[0] = Catalogue.Items[0][7].Copy();
-                npc.SetSelected(0);
-                npc.Skills = [Catalogue.Skills[5], Catalogue.Skills[3], Catalogue.Skills[6]];
-            }
+            npc.Tools = [new(Catalogue.RandomItem(), Element.Neutral)];
+            npc.SelectedTool = 0;
+            npc.Charms = [new(Catalogue.RandomSkill()), new(Catalogue.RandomSkill()), new(Catalogue.RandomSkill())];
+            npc.ActiveCharms = [0, 1, 2];
             return npc;
         } // end of NPC
         public static int randInt(int min, int max)
