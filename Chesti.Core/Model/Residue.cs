@@ -35,7 +35,7 @@ namespace Chesti.Core.Model
         }
         public void Use()
         {
-            Store++;
+            Store+= randInt(2, 5);
         }
         public void Stat()
         {

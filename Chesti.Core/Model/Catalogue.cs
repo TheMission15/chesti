@@ -8,19 +8,19 @@ namespace Chesti.Core.Model
 
         public static void LoadItems()
         {
-            Items[0] = LoadItem(0);
-            Items[1] = LoadItem((Rarity)1);
-            Items[2] = LoadItem((Rarity)2);
-            Items[3] = LoadItem((Rarity)3);
-        }
-        public static void ReloadItems()
-        {
             Items[0] = [];
             Items[1] = [];
             Items[2] = [];
             Items[3] = [];
-
-            LoadItems();
+            Items[0] = DataManager.LoadItems(0);
+            Items[1] = DataManager.LoadItems((Rarity)1);
+            Items[2] = DataManager.LoadItems((Rarity)2);
+            Items[3] = DataManager.LoadItems((Rarity)3);
+        }
+        public static void LoadSkills()
+        { 
+            Skills.Clear();
+            Skills.AddRange(DataManager.LoadSkills());
         }
 
         public static Skill RandomSkill()
@@ -37,21 +37,6 @@ namespace Chesti.Core.Model
             int r = randInt(0, Items[0].Count - 1);
             return Items[0][r];
         }
-        public static Chest GiveChest(Rarity rarity, Element element = (Element)0)
-        {
-            return Chests[(int)rarity].Copy(element);
-        }
-        public static List<Chest> Chests { get; } =
-        [
-            new(Rarity.Standard),
-            new(Rarity.New),
-            new(Rarity.Improved),
-            new(Rarity.Elite),
-            //new(Rarity.Standard, Tier.Base), new(Rarity.Standard, Tier.Tier1), new(Rarity.Standard, Tier.Tier2), new(Rarity.Standard, Tier.Tier3),
-            //new(Rarity.New, Tier.Base), new(Rarity.New, Tier.Tier1), new(Rarity.New, Tier.Tier2), new(Rarity.New, Tier.Tier3),
-            //new(Rarity.Improved, Tier.Base), new(Rarity.Improved, Tier.Tier1), new(Rarity.Improved, Tier.Tier2), new(Rarity.Improved, Tier.Tier3),
-            //new(Rarity.Elite, Tier.Base), new(Rarity.Improved, Tier.Tier1), new(Rarity.Improved, Tier.Tier2),
-        ];
 
         public static List<Skill> Skills { get; } =
         [

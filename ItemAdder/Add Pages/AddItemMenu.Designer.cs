@@ -50,7 +50,6 @@ namespace ItemAdder.Add_Pages
             ItemName.PlaceholderText = "Enter Name";
             ItemName.Size = new Size(125, 27);
             ItemName.TabIndex = 0;
-            ItemName.TextChanged += ItemName_TextChanged;
             // 
             // label1
             // 
@@ -86,11 +85,11 @@ namespace ItemAdder.Add_Pages
             // GroupList
             // 
             GroupList.FormattingEnabled = true;
-            GroupList.Items.AddRange(new object[] { "Power", "Speed", "Range", "Close", "Magic", "Anti" });
+            GroupList.Items.AddRange(new object[] { "Power", "Speed", "Range", "Close", "Magic", "Modern" });
             GroupList.Location = new Point(578, 115);
             GroupList.Name = "GroupList";
             GroupList.Size = new Size(150, 136);
-            GroupList.TabIndex = 4;
+            GroupList.TabIndex = 5;
             // 
             // SubmitBtn
             // 

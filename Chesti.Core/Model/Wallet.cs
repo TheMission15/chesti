@@ -1,11 +1,10 @@
-﻿using Chesti.Core.Result;
-
-namespace Chesti.Core.Model
+﻿namespace Chesti.Core.Model
 {
     public class Wallet
     {
-        public int[] Scales { get; set; }
+        public int[] Scales { get; set; } = [];
         public int Fragments { get; set; }
+        public Wallet() { }
         public Wallet(int scales)
         {
             Scales = new int[7];

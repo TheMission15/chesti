@@ -4,11 +4,13 @@ namespace Chesti.Core.Model
 {
     public class Tool
     {
-        public string Name { get; set; }
-        public int Weight { get; set; }
-        public List<Group> Group { get; set; }
+        public string Name { get; set; } = "";
+        public int Weight { get; set; } 
+        public List<Group> Group { get; set; } = [];
         public double Durability { get; set; }
         public Element Element { get; set; }
+
+        public Tool() { }
 
         public Tool(Item reference, Element element)
         {

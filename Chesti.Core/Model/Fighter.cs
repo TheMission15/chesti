@@ -40,7 +40,7 @@ namespace Chesti.Core.Model
 
             if (SkillUsed != null)
             {
-                int random = randInt(1, 1000);
+                int random = randInt(SkillUsed.Build.CritChance, 1000);
                 double synergy = 1;
                 if (!Tool.Group.Contains(Group.Freestyle))
                 {
@@ -52,10 +52,10 @@ namespace Chesti.Core.Model
                     {
                         synergy -= 0.18;
                     }
-                    if (Tool.Group.Contains(Group.Speed))
-                    {
-                        synergy += 0.08;
-                    }
+                    //if (Tool.Group.Contains(Group.Speed))
+                    //{
+                    //    synergy += 0.08;
+                    //}
                 }
                 if (random <= SkillUsed.Build.CritChance) 
                 {
@@ -75,7 +75,7 @@ namespace Chesti.Core.Model
         {
             if (SkillUsed != null)
             {
-                Wait = Tool.Weight + (SkillUsed.Power / SkillUsed.Speed);
+                Wait = Tool.Weight + ((SkillUsed.Power + Tool.Weight) / SkillUsed.Speed);
             }
             Wait = turn + Wait;
         } // end of CalculateTurn()

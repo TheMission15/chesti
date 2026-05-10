@@ -6,7 +6,7 @@ namespace Chesti.Core
     {
         public static string ListCharms(Player player)
         {
-            string result = String.Empty;
+            string result = "";
             int i = 0;
             foreach (int charm in player.ActiveCharms)
             {

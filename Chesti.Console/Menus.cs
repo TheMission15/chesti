@@ -26,8 +26,7 @@ namespace Chesti.Console
                 }
                 if (menuInput.Key == ConsoleKey.T) // --- Training ---
                 {
-                    //TrainingMenu(player);
-                    popUp("uhhh, dont wanna fix this yet so\n\nTRAINING MENU");
+                    TrainingMenu(player);
                 }
                 if (menuInput.Key == ConsoleKey.F) // --- Food Stand ---
                 {
@@ -56,10 +55,12 @@ namespace Chesti.Console
             while (true)
             {
                 clear(); page("Shop", $"Scales: {player.Wallet.Scales[0]}");
-                print(" C. Charm");
+                print(" C. Charm \n S. Select Charm \n E. Extract Charm");
                 menuInput = readKey();
                 if (menuInput.Key == ConsoleKey.Escape) { break; }
                 if (menuInput.Key == ConsoleKey.C) { GiveCharm(player); }
+                if (menuInput.Key == ConsoleKey.S) { popUp("ChooseCharm()"); }
+                if (menuInput.Key == ConsoleKey.E) { popUp("Extracting ALLL Charms"); }
             }
         }
         public static void SmithingMenu(Player player)
@@ -67,28 +68,34 @@ namespace Chesti.Console
             ConsoleKeyInfo menuInput;
             while (true)
             {
+                var book = Write(player);
                 clear(); page("Shop", $"Scales: {player.Wallet.Scales[0]}");
-                print(" T. New Tool");
+                print(" C. New Tool \n S. Select Tool \n E. Exterminate Tool");
                 menuInput = readKey();
                 if (menuInput.Key == ConsoleKey.Escape) { break; }
-                if (menuInput.Key == ConsoleKey.T) { OpenChest(player); }
+                if (menuInput.Key == ConsoleKey.C) { OpenChest(player); }
+                if (menuInput.Key == ConsoleKey.S) { ViewItems(book, player, true); ; }
+                if (menuInput.Key == ConsoleKey.E) { popUp("Welp there goes ur tool"); }
             }
         }
         public static void TrainingMenu(Player player)
         {
-            //ConsoleKeyInfo menuInput;
-            //if (player.Selected != null && player.Selected.Durability <= 0){ player.DeleteItem(); }
-            //var book = Write(player);
-            //while (true)
-            //{
-            //    var unlock = BattleLock(player);
-            //    clear(); page("Training"); print(unlock.Message);
-            //    menuInput = readKey();
+            popUp("uhhh, dont wanna fix this yet so\n\nTRAINING MENU");
 
-            //    if (menuInput.Key == ConsoleKey.Escape){ break; }
-            //    if (menuInput.Key == ConsoleKey.S){ ViewItems(book, player, true); }
-            //    if (menuInput.Key == ConsoleKey.B && player.Selected != null){ VerifyBattle(player, unlock.Result); }
-            //}
+            ConsoleKeyInfo menuInput;
+            if (player.SelectedTool != -1 && player.Tools[player.SelectedTool].Durability <= 0){ player.DeleteItem(); }
+            var book = Write(player);
+            while (true)
+            {
+                var unlock = BattleLock(player);
+                clear(); page("Training"); print(unlock.Message);
+                menuInput = readKey();
+
+                if (menuInput.Key == ConsoleKey.Escape){ break; }
+                if (menuInput.Key == ConsoleKey.S) { popUp("Soz not yet"); }
+                if (menuInput.Key == ConsoleKey.F) { popUp("They are currently away"); }
+                //    if (menuInput.Key == ConsoleKey.B && player.Selected != null){ VerifyBattle(player, unlock.Result); }
+            }
         }
     }
 }

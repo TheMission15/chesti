@@ -1,0 +1,77 @@
+[
+  {
+    "Name": "Shield",
+    "Weight": 16,
+    "Group": [
+      0
+    ],
+    "Rarity": 2
+  },
+  {
+    "Name": "Dual Swords",
+    "Weight": 12,
+    "Group": [
+      2
+    ],
+    "Rarity": 2
+  },
+  {
+    "Name": "Gloves",
+    "Weight": 6,
+    "Group": [
+      4
+    ],
+    "Rarity": 2
+  },
+  {
+    "Name": "Steel Beam",
+    "Weight": 23,
+    "Group": [
+      0
+    ],
+    "Rarity": 2
+  },
+  {
+    "Name": "Bow",
+    "Weight": 3,
+    "Group": [
+      2,
+      3
+    ],
+    "Rarity": 2
+  },
+  {
+    "Name": "Crossbow",
+    "Weight": 7,
+    "Group": [
+      3,
+      6
+    ],
+    "Rarity": 2
+  },
+  {
+    "Name": "Mirror",
+    "Weight": 14,
+    "Group": [
+      5,
+      6
+    ],
+    "Rarity": 2
+  },
+  {
+    "Name": "Mittens",
+    "Weight": 2,
+    "Group": [
+      1
+    ],
+    "Rarity": 2
+  },
+  {
+    "Name": "Glass Bottle",
+    "Weight": 18,
+    "Group": [
+      6
+    ],
+    "Rarity": 2
+  }
+]

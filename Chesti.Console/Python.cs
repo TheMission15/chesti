@@ -38,7 +38,7 @@
         }
         public static void page(string text, string extra = "")
         {
-            if (text == "Chesti.Console")
+            if (text == "Chesti")
             {
                 print($"Esc to LEAVE          {text}          {extra}\n\n");
             }

@@ -20,9 +20,10 @@ namespace Chesti.Console
             }
             popUp("updated skills: \n" + ListCharms(player), true);
         } // end of GiveSkill
-        public static void OpenChest(Player player)
+        public static void OpenChest(Player player, Element element = Element.Neutral)
         {
-            StringResult result = Catalogue.Chests[0].OpenChest(player);
+            Chest chest = new(Rarity.Standard, element);
+            StringResult result = chest.OpenChest(player);
             if (!result.Result) { popUp(result.Message); }
             else
             {
@@ -66,13 +67,14 @@ namespace Chesti.Console
         } // end of JoinGame
         public static StringResult BattleLock(Player player)
         {
-            if (player.SelectedTool == -1)
+            string baseMessage = " S.Change build \n F. Info Desk";
+            if (player.SelectedTool == -1 && player.ActiveCharms.All(x => x == -1))
             {
-                return new(false, " Esc for back \n S for selecting item");
+                return new(false, $"{baseMessage} \n Make sure you have equiped a Tool and a Charm");
             }
             else
             {
-                return new(true, " Esc for back \n S for selecting item \n B for random battle");
+                return new(true, $"{baseMessage} \n C. Random Battle \n Q. Online \n E. Expedisions");
             }
         } // end of BattleLock
         public static void RoundUI(Battle battle)
@@ -84,11 +86,9 @@ namespace Chesti.Console
             print($"Opp     {battle.Player2.Tools[battle.Player2.SelectedTool].Name}, {battle.Player2.Tools[battle.Player2.SelectedTool].Weight}KG\n\n");
             print($" durability {battle.Fighter2.Durability}\n {battle.Fighter2.Damage} Damage \n on turn {battle.Fighter2.Wait}\n\n");
         }
-        public static void VerifyBattle(Player player, bool itemLock)
+        public static void VerifyBattle(Player player, bool unLock)
         {
-            bool skillLock = false;
-            if (player.ActiveCharms.All(x => x == -1)) { skillLock = true; }
-            if (skillLock || !itemLock)
+            if (!unLock)
             {
                 popUp("You need at least one skill and some durability on ur tool");
             }

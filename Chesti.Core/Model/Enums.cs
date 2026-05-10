@@ -15,6 +15,8 @@
         Water,
         Lightning,
         Nature,
+        Ice,
+        Anti,
     }
     public enum Group // for weapons and skill effectiveness
     {
@@ -24,7 +26,7 @@
         Range,
         Close,
         Magic,
-        Anti,
+        Modern,
         //Gloves,
         //Sword,
         //Bow,

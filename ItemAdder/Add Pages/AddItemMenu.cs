@@ -10,7 +10,7 @@ namespace ItemAdder.Add_Pages
         public int ItmWeight = 0;
         public List<Group> groups = [];
         public Rarity? InRarity = null;
-        
+
         public AddItemMenu()
         {
             InitializeComponent();
@@ -22,32 +22,39 @@ namespace ItemAdder.Add_Pages
             {
                 if (c is RadioButton rb && rb.Checked) { InRarity = (Rarity?)rb.Tag; }
             }
-                if (GroupList.CheckedItems.Count <= 2 && int.TryParse(ItemWeight.Text, out ItmWeight) && InRarity != null) { AllowSubmit = true; }
+            if (GroupList.CheckedItems.Count <= 2 && int.TryParse(ItemWeight.Text, out ItmWeight) && InRarity != null) { AllowSubmit = true; }
             else { AllowSubmit = false; }
             ItmName = ItemName.Text;
 
-
             if (AllowSubmit)
             {
-                for (int i = 0; i < GroupList.CheckedItems.Count; i++)
+                groups = [];
+                string grouping = "";
+                int randomInt = 0;
+                if (GroupList.CheckedItems.Count == 0)
                 {
-                    groups.Append((Group)GroupList.CheckedIndices[i]);
+                    label1.Text = "it works";
+                    groups.Add(Group.Freestyle);
+                    grouping += $"{groups[0]}, ";
                 }
-                label1.Text = $"{ItmName}, {InRarity}, {ItmWeight}, {groups[0]} {groups[1]}";
+                else
+                {
+                    foreach (var cItem in GroupList.CheckedItems)
+                    {
+                        if (Enum.TryParse<Group>(cItem.ToString(), out Group group))
+                        {
+                            groups.Add(group);
+                        }
+                        grouping += $"{groups[randomInt]}, ";
+                        randomInt++;
+                    }
+                }
+
+                label1.Text = $"{ItmName}, {InRarity}, {ItmWeight}, {grouping}";
                 Item item = new(ItmName, ItmWeight, (Rarity)InRarity!, groups);
                 AddItem(item);
             }
             else { label1.Text = "WRONG"; }
-        }
-
-        private void GroupList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ItemName_TextChanged(object sender, EventArgs e)
-        {
-            
         }
     }
 }

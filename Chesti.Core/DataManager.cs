@@ -7,7 +7,7 @@ namespace Chesti.Core
     {
         public static string BasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Chesti");
         public static string Folder = "C:\\Users\\raulc\\source\\repos\\Chesti\\Chesti.Core\\Catalogue";
-        public static Player PlayerSaves(string username)
+        public static Player PlayerSaves(string username)  // --- Player Data ---
         {
             string path = Path.Combine(BasePath, "Data");
             if (!Directory.Exists(path))
@@ -48,8 +48,10 @@ namespace Chesti.Core
             {
                 Directory.Delete(path);
             }
-        }
-        public static List<Item> LoadItem(Rarity rarity)
+        }                       //      --- Player Data ---
+
+
+        public static List<Item> LoadItems(Rarity rarity) // --- Item Data ---
         {
             string path = Folder;
             if (!Directory.Exists(path))
@@ -60,7 +62,7 @@ namespace Chesti.Core
             if (File.Exists(path))
             {
                 string json = File.ReadAllText(path);
-                List<Item> item = JsonSerializer.Deserialize<List<Item>>(json) ?? new();
+                List<Item> item = JsonSerializer.Deserialize<List<Item>>(json) ?? [];
                 return item;
             }
             else
@@ -77,11 +79,47 @@ namespace Chesti.Core
             {
                 Directory.CreateDirectory(path);
             }
-            List<Item> items = LoadItem(item.Rarity);
+            List<Item> items = LoadItems(item.Rarity);
             items.Add(item);
             path = Path.Combine(path, $"{item.Rarity}.json");
             string jsonData = JsonSerializer.Serialize(items, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(path, jsonData);
+        }                   //              --- Item Data ---
+
+
+        public static List<Skill> LoadSkills() // --- Skill Data ---
+        {
+            string path = Folder;
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            path = Path.Combine(path, $"Skill.json");
+            if (File.Exists(path))
+            {
+                string json = File.ReadAllText(path);
+                List<Skill> skills = JsonSerializer.Deserialize<List<Skill>>(json) ?? [];
+                return skills;
+            }
+            else
+            {
+                List<Skill> skills = [];
+                string json = JsonSerializer.Serialize(skills, new JsonSerializerOptions { WriteIndented = true });
+                return skills;
+            }
         }
+        public static void AddSkill(Skill skill)
+        {
+            string path = Folder;
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            List<Skill> skills = LoadSkills();
+            skills.Add(skill);
+            path = Path.Combine(path, $"Skill.json");
+            string jsonData = JsonSerializer.Serialize(skills, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(path, jsonData);
+        }                   //              --- Skill Data ---
     }
 }

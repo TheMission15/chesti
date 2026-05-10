@@ -1,0 +1,76 @@
+[
+  {
+    "Name": "Sword",
+    "Weight": 11,
+    "Group": [
+      0
+    ],
+    "Rarity": 1
+  },
+  {
+    "Name": "Hammer",
+    "Weight": 17,
+    "Group": [
+      1
+    ],
+    "Rarity": 1
+  },
+  {
+    "Name": "Axe",
+    "Weight": 13,
+    "Group": [
+      0
+    ],
+    "Rarity": 1
+  },
+  {
+    "Name": "Dagger",
+    "Weight": 5,
+    "Group": [
+      4
+    ],
+    "Rarity": 1
+  },
+  {
+    "Name": "Stick",
+    "Weight": 2,
+    "Group": [
+      5
+    ],
+    "Rarity": 1
+  },
+  {
+    "Name": "Baton",
+    "Weight": 6,
+    "Group": [
+      0
+    ],
+    "Rarity": 1
+  },
+  {
+    "Name": "Rapier",
+    "Weight": 3,
+    "Group": [
+      2,
+      3
+    ],
+    "Rarity": 1
+  },
+  {
+    "Name": "Grenade",
+    "Weight": 5,
+    "Group": [
+      6
+    ],
+    "Rarity": 1
+  },
+  {
+    "Name": "Molotov",
+    "Weight": 15,
+    "Group": [
+      3,
+      6
+    ],
+    "Rarity": 1
+  }
+]
