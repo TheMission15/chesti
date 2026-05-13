@@ -8,7 +8,7 @@ namespace ItemAdder.Add_Pages
         public bool AllowSubmit = false;
         public string ItmName = "";
         public int ItmWeight = 0;
-        public List<Group> groups = [];
+        public Group[] groups = new Group[2];
         public Rarity? InRarity = null;
 
         public AddItemMenu()
@@ -22,7 +22,7 @@ namespace ItemAdder.Add_Pages
             {
                 if (c is RadioButton rb && rb.Checked) { InRarity = (Rarity?)rb.Tag; }
             }
-            if (GroupList.CheckedItems.Count <= 2 && int.TryParse(ItemWeight.Text, out ItmWeight) && InRarity != null) { AllowSubmit = true; }
+            if (GroupList.CheckedItems.Count == 2 && int.TryParse(ItemWeight.Text, out ItmWeight) && InRarity != null) { AllowSubmit = true; }
             else { AllowSubmit = false; }
             ItmName = ItemName.Text;
 
@@ -31,27 +31,17 @@ namespace ItemAdder.Add_Pages
                 groups = [];
                 string grouping = "";
                 int randomInt = 0;
-                if (GroupList.CheckedItems.Count == 0)
+                foreach (var cItem in GroupList.CheckedItems)
                 {
-                    label1.Text = "it works";
-                    groups.Add(Group.Freestyle);
-                    grouping += $"{groups[0]}, ";
-                }
-                else
-                {
-                    foreach (var cItem in GroupList.CheckedItems)
+                    if (Enum.TryParse<Group>(cItem.ToString(), out Group group))
                     {
-                        if (Enum.TryParse<Group>(cItem.ToString(), out Group group))
-                        {
-                            groups.Add(group);
-                        }
-                        grouping += $"{groups[randomInt]}, ";
-                        randomInt++;
+                        groups[randomInt] = (group);
                     }
+                    grouping += $"{groups[randomInt]}, ";
+                    randomInt++;
                 }
-
                 label1.Text = $"{ItmName}, {InRarity}, {ItmWeight}, {grouping}";
-                Item item = new(ItmName, ItmWeight, (Rarity)InRarity!, groups);
+                Item item = new(ItmName, ItmWeight, groups);
                 AddItem(item);
             }
             else { label1.Text = "WRONG"; }

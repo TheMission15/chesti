@@ -21,27 +21,14 @@ namespace Chesti.Core
                 }
             } return result;
         } // end of ListSkills
-        public static AcquireCharmResult AcquireCharm(Player player)
-        {
-            AcquireCharmResult result = new(false, "", Catalogue.RandomSkill(), false);
-            
-            result.Result = true;
-            result.Message += $"Skill aquired {result.Charm}\n";
-            result.Message += ListCharms(player);
-            if (player.ActiveCharms.All(x => x != -1))
-            {
-                result.Droppable = true;
-                result.Message += "D to not equip\n";
-            }
-            
-            return result;
-        }
+        
         public static Player NPC(Player npc)
         {
-            npc.Tools = [new(Catalogue.RandomItem(), Element.Neutral)];
-            npc.SelectedTool = 0;
-            npc.Charms = [new(Catalogue.RandomSkill()), new(Catalogue.RandomSkill()), new(Catalogue.RandomSkill())];
-            npc.ActiveCharms = [0, 1, 2];
+            ToolChest(npc, 1);
+            npc.SelectedTool = npc.Tools.Count -1;
+            for (int i = 0; i< 3; i++) { CharmChest(npc, 1); }
+            int c = npc.Charms.Count;
+            npc.ActiveCharms = [c - 1, c - 2, c - 3];
             return npc;
         } // end of NPC
         public static int randInt(int min, int max)
@@ -83,17 +70,109 @@ namespace Chesti.Core
         }
         public static Group ChooseGroup(Skill skill)
         {
-            int count = skill.Secondary.Count;
-            int r = randInt(1, 2);
-            if (r == 2 && count > 0)
+            int r = randInt(0, skill.Groups.Count - 1);
+            return skill.Groups[r];
+        }
+
+        //
+        //      --- Chests ---
+        //
+
+        public static StringResult CharmChest(Player player, int odds)
+        {
+            Catalogue.LoadSkills();
+            int r;
+            Rarity rarity = 0;
+            if (player.Wallet.Scales <= 0)
             {
-                r = randInt(0, count - 1);
-                return skill.Secondary[r];
+                return new(false, "Out of Scales");
             }
-            else
+            while (true)
             {
-                return skill.Main;
+                r = randInt(1, 100);
+
+                if (r > odds || rarity >= Rarity.Elite)
+                {
+                    break;
+                }
+                else if (r <= odds)
+                {
+                    rarity++;
+                }
             }
+            int count = Catalogue.Skills[(int)rarity].Count;
+            if (count > 0)
+            {
+                r = randInt(0, count-1);
+                player.Charms.Add(new(Catalogue.Skills[(int)rarity][r]));
+                DataManager.SavePlayer(player);
+                Charm charm = player.Charms[^1];
+                return new(true, $"{charm}");
+            }
+            return new(false, "error");
+        }
+
+        public static StringResult Extraction(Player player, int i, int amount)
+        {
+            if (player.Wallet.Fragments>=amount && i < player.Charms.Count)
+            {
+                player.Wallet.Fragments -= amount;
+                player.Wallet.Scales += (amount*player.Charms[i].Build.Essence)/50;
+                for (int k=0; k<3;  k++)
+                {
+                    if (player.ActiveCharms[k] == i)
+                    {
+                        player.ActiveCharms[k] = -1;
+                    }
+                }
+                player.Charms.RemoveAt(i);
+            }
+            return new(false, "error");
+        }
+
+
+        public static StringResult ToolChest(Player player, int odds)
+        {
+            Catalogue.LoadItems();
+            int count = Catalogue.Items.Count;
+            int r;
+            Rarity rarity = 0;
+            if (player.Wallet.Scales <= 0)
+            {
+                return new(false, "Out of Scales");
+            }
+            while (true)
+            { 
+                r = randInt(1, 100);
+
+                if (r > odds || rarity >= Rarity.Elite)
+                {
+                    break;
+                }
+                else if (r <= odds)
+                {
+                    rarity++;
+                }
+            }
+            if (count > 0)
+            {
+                r = randInt(0, count);
+                player.Tools.Add(new(Catalogue.Items[count], rarity));
+                player.Wallet.Scales--;
+                DataManager.SavePlayer(player);
+                return new(true, $"New Tool! \n {player.Tools[^1]}, {rarity}");
+            }
+            return new(false, "Error");
+        }
+        public static StringResult SellTool(Player player, int i)
+        {
+            int fragments;
+            int scales;
+            player.Wallet.Fragments += fragments = (int)Math.Pow(player.Tools[i].Durability / 2, 0.5);
+            player.Wallet.Scales += scales = (int)Math.Pow(player.Tools[i].Durability / 2, 0.4);
+            var result = new StringResult(true, $"Sold {player.Tools[i]} for {fragments} fragments and {scales} scales");
+            player.Tools.RemoveAt(i);
+            return result;
         }
     }
 }

@@ -9,32 +9,45 @@ namespace Chesti.Console
 {
     public class Methods
     {
-        public static void GiveCharm(Player player)
+        public static void ShowCharmPage(Page<Charm> page, Player player)
         {
-            var result = AcquireCharm(player);
-            print(result.Message);
-            while (result.Result)
-            {
-                ConsoleKeyInfo key = readKey();
-                result.Result = player.SetSkill(result, key.Key);
-            }
-            popUp("updated skills: \n" + ListCharms(player), true);
-        } // end of GiveSkill
-        public static void OpenChest(Player player, Element element = Element.Neutral)
-        {
-            Chest chest = new(Rarity.Standard, element);
-            StringResult result = chest.OpenChest(player);
-            if (!result.Result) { popUp(result.Message); }
-            else
-            {
-                popUp($"You opened a {result.Message}");
-            }
-        }
-        public static void ShowItemPage(Page<Tool> page, Player player)
+            for (int i = 0; i < page.InPage; i++) { print($"{i + 1}. {page.Items[i]}"); }
+        } // end of ShowCharmPage
+        public static void ShowToolPage(Page<Tool> page, Player player)
         {
             for (int i = 0; i < page.InPage; i++) { print($"{i + 1}. {page.Items[i]}"); }
         } // end of ShowItemPage
-        public static bool ViewItems(Book<Tool> book, Player player, bool selecting = false)
+
+        public static bool ViewCharms(Book<Charm> book, Player player, bool selecting = false)
+        {
+            if (player.Charms.Count == 0)
+            {
+                popUp("no can do without any experience");
+                return false;
+            }
+            ConsoleKeyInfo k;
+            IntResult result = new(true, -1);
+            while (result.Result)
+            {
+                clear(); print($"Page {book.Page} of {book.Pages.Count}    ESC to leave    arrow keys to change pages");
+                ShowCharmPage(book.Pages[book.Page - 1], player);
+                k = readKey(); result = book.BookNav(player, k.Key, selecting);
+
+            }
+            if (result.Number > -1)
+            {
+                bool loop = true;
+                while (loop)
+                {
+                    clear(); print(ListCharms(player));
+                    k = readKey();
+                    loop = player.SetSkill(result.Number, k.Key);
+                }
+            }
+            popUp($"\nItem Selected: ", true);
+            return true;
+        } // end of ViewCharms
+        public static bool ViewTools(Book<Tool> book, Player player, bool selecting = false)
         {
             if (player.Tools.Count == 0)
             {
@@ -46,7 +59,7 @@ namespace Chesti.Console
             while (result.Result)
             {
                 clear(); print($"Page {book.Page} of {book.Pages.Count}    ESC to leave    arrow keys to change pages");
-                ShowItemPage(book.Pages[book.Page-1], player);
+                ShowToolPage(book.Pages[book.Page-1], player);
                 k = readKey(); result = book.BookNav(player, k.Key, selecting);
 
             }
@@ -54,7 +67,8 @@ namespace Chesti.Console
             popUp($"\nItem Selected: {player.Tools[player.SelectedTool]}", true);
             return true;
         } // end of ViewItems
-        public static Book<Tool> Write(Player player){ return new(player.Tools); }
+        public static Book<Tool> WriteT(Player player) { return new(player.Tools); }
+        public static Book<Charm> WriteC(Player player) { return new(player.Charms); }
         public static Player JoinGame()
         {
             string? username = null;
@@ -107,8 +121,8 @@ namespace Chesti.Console
 
             for (int i = 0; i < battle.BestOf; i++)
             {
-                book = Write(player);
-                while (battle.Result.Player1Break) { ViewItems(book, player, true); battle.Result.Player1Break = false; }
+                book = WriteT(player);
+                while (battle.Result.Player1Break) { ViewTools(book, player, true); battle.Result.Player1Break = false; }
                 print(battle.StartOfRound()+"\n");
                 if (battle.Result.PassedNullCheck && !battle.Result.WinconReached && battle.Result.Active)
                 {

@@ -4,14 +4,12 @@
     {
         public string Name { get; set; }
         public int Weight { get; set; }
-        public List<Group> Group { get; set; }
-        public Rarity Rarity { get; set; }
-        public Item(string name, int weight, Rarity rarity, List<Group> group)
+        public Group[] Groups { get; set; } = new Group[2];
+        public Item(string name, int weight, Group[] groups)
         {
             Name = name;
-            Rarity = rarity;
             Weight = weight;
-            Group = group;
+            Groups = groups;
         }
     }
 }

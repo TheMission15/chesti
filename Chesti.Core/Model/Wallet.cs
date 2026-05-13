@@ -2,18 +2,17 @@
 {
     public class Wallet
     {
-        public int[] Scales { get; set; } = [];
+        public int Scales { get; set; }
         public int Fragments { get; set; }
         public Wallet() { }
         public Wallet(int scales)
         {
-            Scales = new int[7];
-            Scales[0] = scales;
+            Scales = scales;
             Fragments = 0;
         }
         public override string ToString()
         {
-            return $" Scales: {Scales[0]} \n Fragments: {Fragments}";
+            return $" Scales: {Scales} \n Fragments: {Fragments}";
         }
     }
 }

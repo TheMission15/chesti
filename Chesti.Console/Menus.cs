@@ -11,7 +11,6 @@ namespace Chesti.Console
         public static void Menu()
         {
             Player player = JoinGame(); //PlayerSaves("mission");//
-            LoadItems();
             ConsoleKeyInfo menuInput;
             while (true)
             {
@@ -54,12 +53,13 @@ namespace Chesti.Console
             ConsoleKeyInfo menuInput;
             while (true)
             {
-                clear(); page("Shop", $"Scales: {player.Wallet.Scales[0]}");
+                var book = WriteC(player);
+                clear(); page("Shop", $"Scales: {player.Wallet.Scales}");
                 print(" C. Charm \n S. Select Charm \n E. Extract Charm");
                 menuInput = readKey();
                 if (menuInput.Key == ConsoleKey.Escape) { break; }
-                if (menuInput.Key == ConsoleKey.C) { GiveCharm(player); }
-                if (menuInput.Key == ConsoleKey.S) { popUp("ChooseCharm()"); }
+                if (menuInput.Key == ConsoleKey.C) { Core.Methods.CharmChest(player, 1); }
+                if (menuInput.Key == ConsoleKey.S) { ViewCharms(book, player, true); }
                 if (menuInput.Key == ConsoleKey.E) { popUp("Extracting ALLL Charms"); }
             }
         }
@@ -68,13 +68,13 @@ namespace Chesti.Console
             ConsoleKeyInfo menuInput;
             while (true)
             {
-                var book = Write(player);
-                clear(); page("Shop", $"Scales: {player.Wallet.Scales[0]}");
+                var book = WriteT(player);
+                clear(); page("Shop", $"Scales: {player.Wallet.Scales}");
                 print(" C. New Tool \n S. Select Tool \n E. Exterminate Tool");
                 menuInput = readKey();
                 if (menuInput.Key == ConsoleKey.Escape) { break; }
-                if (menuInput.Key == ConsoleKey.C) { OpenChest(player); }
-                if (menuInput.Key == ConsoleKey.S) { ViewItems(book, player, true); ; }
+                if (menuInput.Key == ConsoleKey.C) { Core.Methods.ToolChest(player, 1); }
+                if (menuInput.Key == ConsoleKey.S) { ViewTools(book, player, true); ; }
                 if (menuInput.Key == ConsoleKey.E) { popUp("Welp there goes ur tool"); }
             }
         }
@@ -84,7 +84,7 @@ namespace Chesti.Console
 
             ConsoleKeyInfo menuInput;
             if (player.SelectedTool != -1 && player.Tools[player.SelectedTool].Durability <= 0){ player.DeleteItem(); }
-            var book = Write(player);
+            var book = WriteT(player);
             while (true)
             {
                 var unlock = BattleLock(player);

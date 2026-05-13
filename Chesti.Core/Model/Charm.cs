@@ -4,6 +4,7 @@ namespace Chesti.Core.Model
     public class Charm
     {
         public string Name { get; set; } = "";
+        Rarity Rarity { get; set; }
         public int Power { get; set; }
         public int Speed { get; set; }
         public Group Group { get; set; }
@@ -14,13 +15,14 @@ namespace Chesti.Core.Model
 
         public Charm(Skill reference)
         {
-            Name = reference.Name; Power = reference.Power; Speed = reference.Speed; Element = reference.Element;
+            Name = reference.Name; Power = reference.Power; Speed = reference.Speed; 
+            Element = reference.Element; Rarity = reference.Rarity;
             Build = new();
             Group = ChooseGroup(reference);
         }
         public override string ToString()
         {
-            return $"{Name}, {Power} power, {Speed} speed";
+            return $"{Name}  {Power}/{Speed}  {Group}/{Element}";
         }
     }
 }

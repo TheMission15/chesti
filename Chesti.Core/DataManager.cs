@@ -51,25 +51,25 @@ namespace Chesti.Core
         }                       //      --- Player Data ---
 
 
-        public static List<Item> LoadItems(Rarity rarity) // --- Item Data ---
+        public static List<Item> LoadItems() // --- Item Data ---
         {
             string path = Folder;
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
             }
-            path = Path.Combine(path, $"{rarity}.json");
+            path = Path.Combine(path, $"Items.json");
             if (File.Exists(path))
             {
                 string json = File.ReadAllText(path);
-                List<Item> item = JsonSerializer.Deserialize<List<Item>>(json) ?? [];
-                return item;
+                List<Item> items = JsonSerializer.Deserialize<List<Item>>(json) ?? [];
+                return items;
             }
             else
             {
-                List<Item> item = [];
-                string json = JsonSerializer.Serialize(item, new JsonSerializerOptions { WriteIndented = true });
-                return item;
+                List<Item> items = [];
+                string json = JsonSerializer.Serialize(items, new JsonSerializerOptions { WriteIndented = true });
+                return items;
             }
         }
         public static void AddItem(Item item)
@@ -79,22 +79,22 @@ namespace Chesti.Core
             {
                 Directory.CreateDirectory(path);
             }
-            List<Item> items = LoadItems(item.Rarity);
+            List<Item> items = LoadItems();
             items.Add(item);
-            path = Path.Combine(path, $"{item.Rarity}.json");
+            path = Path.Combine(path, $"Items.json");
             string jsonData = JsonSerializer.Serialize(items, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(path, jsonData);
         }                   //              --- Item Data ---
 
 
-        public static List<Skill> LoadSkills() // --- Skill Data ---
+        public static List<Skill> LoadSkills(Rarity rarity) // --- Skill Data ---
         {
             string path = Folder;
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
             }
-            path = Path.Combine(path, $"Skill.json");
+            path = Path.Combine(path, $"{rarity}.json");
             if (File.Exists(path))
             {
                 string json = File.ReadAllText(path);
@@ -115,9 +115,9 @@ namespace Chesti.Core
             {
                 Directory.CreateDirectory(path);
             }
-            List<Skill> skills = LoadSkills();
+            List<Skill> skills = LoadSkills(skill.Rarity);
             skills.Add(skill);
-            path = Path.Combine(path, $"Skill.json");
+            path = Path.Combine(path, $"{skill.Rarity}.json");
             string jsonData = JsonSerializer.Serialize(skills, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(path, jsonData);
         }                   //              --- Skill Data ---

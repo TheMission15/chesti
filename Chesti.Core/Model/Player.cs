@@ -30,16 +30,23 @@ namespace Chesti.Core.Model
             Tools.RemoveAt(SelectedTool);
             SelectedTool = -1;
         }
-        public bool SetSkill(AcquireCharmResult result, ConsoleKey k)
+        public bool SetSkill(int i, ConsoleKey k)
         {
             bool runAgain = true;
             if (k >= ConsoleKey.D1 && k <= ConsoleKey.D3)
             {
                 int index = k - ConsoleKey.D0 - 1;
-                ActiveCharms[index] = Charms.FindIndex(c => c == result.Charm);
+                for (int p = 0; p < 3; p++)
+                {
+                    if (ActiveCharms[p] == i)
+                    {
+                        ActiveCharms[p] = i;
+                    }
+                }
+                ActiveCharms[index] = i;
                 runAgain = false;
             }
-            else if (result.Droppable == true)
+            else if (k == ConsoleKey.Escape)
             {
                 runAgain = false;
             }
