@@ -32,14 +32,17 @@ namespace ItemAdder.Add_Pages
         {
             ItemName = new TextBox();
             label1 = new Label();
-            StandardBtn = new RadioButton();
             ItemWeight = new TextBox();
             GroupList = new CheckedListBox();
             SubmitBtn = new Button();
             label2 = new Label();
-            NewBtn = new RadioButton();
-            ImprovedBtn = new RadioButton();
-            EliteBtn = new RadioButton();
+            ModernBtn = new RadioButton();
+            MagicBtn = new RadioButton();
+            CloseBtn = new RadioButton();
+            FreestyleBtn = new RadioButton();
+            PowerBtn = new RadioButton();
+            SpeedBtn = new RadioButton();
+            RangeBtn = new RadioButton();
             SuspendLayout();
             // 
             // ItemName
@@ -61,22 +64,9 @@ namespace ItemAdder.Add_Pages
             label1.TabIndex = 1;
             label1.Text = "Enter New Item";
             // 
-            // StandardBtn
-            // 
-            StandardBtn.AutoSize = true;
-            StandardBtn.BackColor = SystemColors.Control;
-            StandardBtn.Location = new Point(234, 118);
-            StandardBtn.Name = "StandardBtn";
-            StandardBtn.Size = new Size(90, 24);
-            StandardBtn.TabIndex = 2;
-            StandardBtn.TabStop = true;
-            StandardBtn.Tag = Rarity.Standard;
-            StandardBtn.Text = "Standard";
-            StandardBtn.UseVisualStyleBackColor = false;
-            // 
             // ItemWeight
             // 
-            ItemWeight.Location = new Point(401, 115);
+            ItemWeight.Location = new Point(52, 167);
             ItemWeight.Name = "ItemWeight";
             ItemWeight.PlaceholderText = "Enter Weight";
             ItemWeight.Size = new Size(125, 27);
@@ -113,44 +103,96 @@ namespace ItemAdder.Add_Pages
             label2.TabIndex = 6;
             label2.Text = "Enter Name, Rarity, Weight, Group(s)\r\n";
             // 
-            // NewBtn
+            // ModernBtn
             // 
-            NewBtn.AutoSize = true;
-            NewBtn.BackColor = SystemColors.Control;
-            NewBtn.Location = new Point(234, 163);
-            NewBtn.Name = "NewBtn";
-            NewBtn.Size = new Size(60, 24);
-            NewBtn.TabIndex = 7;
-            NewBtn.TabStop = true;
-            NewBtn.Tag = Rarity.New;
-            NewBtn.Text = "New";
-            NewBtn.UseVisualStyleBackColor = false;
+            ModernBtn.AutoSize = true;
+            ModernBtn.BackColor = SystemColors.Control;
+            ModernBtn.Location = new Point(280, 297);
+            ModernBtn.Name = "ModernBtn";
+            ModernBtn.Size = new Size(82, 24);
+            ModernBtn.TabIndex = 25;
+            ModernBtn.TabStop = true;
+            ModernBtn.Tag = Group.Modern;
+            ModernBtn.Text = "Modern";
+            ModernBtn.UseVisualStyleBackColor = false;
             // 
-            // ImprovedBtn
+            // MagicBtn
             // 
-            ImprovedBtn.AutoSize = true;
-            ImprovedBtn.BackColor = SystemColors.Control;
-            ImprovedBtn.Location = new Point(234, 206);
-            ImprovedBtn.Name = "ImprovedBtn";
-            ImprovedBtn.Size = new Size(94, 24);
-            ImprovedBtn.TabIndex = 8;
-            ImprovedBtn.TabStop = true;
-            ImprovedBtn.Tag = Rarity.Improved;
-            ImprovedBtn.Text = "Improved";
-            ImprovedBtn.UseVisualStyleBackColor = false;
+            MagicBtn.AutoSize = true;
+            MagicBtn.BackColor = SystemColors.Control;
+            MagicBtn.Location = new Point(280, 267);
+            MagicBtn.Name = "MagicBtn";
+            MagicBtn.Size = new Size(71, 24);
+            MagicBtn.TabIndex = 24;
+            MagicBtn.TabStop = true;
+            MagicBtn.Tag = Group.Magic;
+            MagicBtn.Text = "Magic";
+            MagicBtn.UseVisualStyleBackColor = false;
             // 
-            // EliteBtn
+            // CloseBtn
             // 
-            EliteBtn.AutoSize = true;
-            EliteBtn.BackColor = SystemColors.Control;
-            EliteBtn.Location = new Point(234, 256);
-            EliteBtn.Name = "EliteBtn";
-            EliteBtn.Size = new Size(59, 24);
-            EliteBtn.TabIndex = 9;
-            EliteBtn.TabStop = true;
-            EliteBtn.Tag = Rarity.Elite;
-            EliteBtn.Text = "Elite";
-            EliteBtn.UseVisualStyleBackColor = false;
+            CloseBtn.AutoSize = true;
+            CloseBtn.BackColor = SystemColors.Control;
+            CloseBtn.Location = new Point(280, 237);
+            CloseBtn.Name = "CloseBtn";
+            CloseBtn.Size = new Size(66, 24);
+            CloseBtn.TabIndex = 23;
+            CloseBtn.TabStop = true;
+            CloseBtn.Tag = Group.Close;
+            CloseBtn.Text = "Close";
+            CloseBtn.UseVisualStyleBackColor = false;
+            // 
+            // FreestyleBtn
+            // 
+            FreestyleBtn.AutoSize = true;
+            FreestyleBtn.BackColor = SystemColors.Control;
+            FreestyleBtn.Location = new Point(280, 115);
+            FreestyleBtn.Name = "FreestyleBtn";
+            FreestyleBtn.Size = new Size(88, 24);
+            FreestyleBtn.TabIndex = 22;
+            FreestyleBtn.TabStop = true;
+            FreestyleBtn.Tag = Group.Freestyle;
+            FreestyleBtn.Text = "Freestyle";
+            FreestyleBtn.UseVisualStyleBackColor = false;
+            // 
+            // PowerBtn
+            // 
+            PowerBtn.AutoSize = true;
+            PowerBtn.BackColor = SystemColors.Control;
+            PowerBtn.Location = new Point(280, 145);
+            PowerBtn.Name = "PowerBtn";
+            PowerBtn.Size = new Size(70, 24);
+            PowerBtn.TabIndex = 21;
+            PowerBtn.TabStop = true;
+            PowerBtn.Tag = Group.Power;
+            PowerBtn.Text = "Power";
+            PowerBtn.UseVisualStyleBackColor = false;
+            // 
+            // SpeedBtn
+            // 
+            SpeedBtn.AutoSize = true;
+            SpeedBtn.BackColor = SystemColors.Control;
+            SpeedBtn.Location = new Point(280, 177);
+            SpeedBtn.Name = "SpeedBtn";
+            SpeedBtn.Size = new Size(72, 24);
+            SpeedBtn.TabIndex = 20;
+            SpeedBtn.TabStop = true;
+            SpeedBtn.Tag = Group.Speed;
+            SpeedBtn.Text = "Speed";
+            SpeedBtn.UseVisualStyleBackColor = false;
+            // 
+            // RangeBtn
+            // 
+            RangeBtn.AutoSize = true;
+            RangeBtn.BackColor = SystemColors.Control;
+            RangeBtn.Location = new Point(280, 207);
+            RangeBtn.Name = "RangeBtn";
+            RangeBtn.Size = new Size(72, 24);
+            RangeBtn.TabIndex = 19;
+            RangeBtn.TabStop = true;
+            RangeBtn.Tag = Group.Range;
+            RangeBtn.Text = "Range";
+            RangeBtn.UseVisualStyleBackColor = false;
             // 
             // AddItemMenu
             // 
@@ -158,18 +200,22 @@ namespace ItemAdder.Add_Pages
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaption;
             ClientSize = new Size(800, 450);
-            Controls.Add(EliteBtn);
-            Controls.Add(ImprovedBtn);
-            Controls.Add(NewBtn);
+            Controls.Add(ModernBtn);
+            Controls.Add(MagicBtn);
+            Controls.Add(CloseBtn);
+            Controls.Add(FreestyleBtn);
+            Controls.Add(PowerBtn);
+            Controls.Add(SpeedBtn);
+            Controls.Add(RangeBtn);
             Controls.Add(label2);
             Controls.Add(SubmitBtn);
             Controls.Add(GroupList);
             Controls.Add(ItemWeight);
-            Controls.Add(StandardBtn);
             Controls.Add(label1);
             Controls.Add(ItemName);
             Name = "AddItemMenu";
             Text = "New Item";
+            Load += AddItemMenu_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -178,14 +224,16 @@ namespace ItemAdder.Add_Pages
 
         private TextBox ItemName;
         private Label label1;
-        private RadioButton StandardBtn;
         private TextBox ItemWeight;
         private CheckedListBox GroupList;
         private Button SubmitBtn;
         private Label label2;
-        private RadioButton NewBtn;
-        private RadioButton ImprovedBtn;
-        private RadioButton EliteBtn;
-
+        private RadioButton ModernBtn;
+        private RadioButton MagicBtn;
+        private RadioButton CloseBtn;
+        private RadioButton FreestyleBtn;
+        private RadioButton PowerBtn;
+        private RadioButton SpeedBtn;
+        private RadioButton RangeBtn;
     }
 }

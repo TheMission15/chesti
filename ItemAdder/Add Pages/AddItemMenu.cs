@@ -46,5 +46,10 @@ namespace ItemAdder.Add_Pages
             }
             else { label1.Text = "WRONG"; }
         }
+
+        private void AddItemMenu_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
