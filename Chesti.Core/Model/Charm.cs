@@ -4,7 +4,7 @@ namespace Chesti.Core.Model
     public class Charm
     {
         public string Name { get; set; } = "";
-        Rarity Rarity { get; set; }
+        public Rarity Rarity { get; set; }
         public int Power { get; set; }
         public int Speed { get; set; }
         public Group Group { get; set; }

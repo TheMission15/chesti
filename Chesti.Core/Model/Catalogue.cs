@@ -20,8 +20,8 @@
             }
         }
 
-        public static List<Skill>[] Skills { get; } = [];
-        public static Group?[] groups = new Group?[2];
+        public static List<Skill>[] Skills { get; } = new List<Skill>[4];
+        //public static Group?[] groups = new Group?[2];
         public static List<Item> Items { get; } = [];
     }
 }

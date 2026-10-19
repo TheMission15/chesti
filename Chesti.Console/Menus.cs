@@ -43,6 +43,8 @@ namespace Chesti.Console
                 {
                     popUp(player.Wallet.ToString());
                 }
+                if (menuInput.Key == ConsoleKey.X)
+                    CreateItem();
             }
             clear();
             SavePlayer(player);
@@ -58,7 +60,7 @@ namespace Chesti.Console
                 print(" C. Charm \n S. Select Charm \n E. Extract Charm");
                 menuInput = readKey();
                 if (menuInput.Key == ConsoleKey.Escape) { break; }
-                if (menuInput.Key == ConsoleKey.C) { Core.Methods.CharmChest(player, 1); }
+                if (menuInput.Key == ConsoleKey.C) { Core.Methods.CharmChest(player, 50); }
                 if (menuInput.Key == ConsoleKey.S) { ViewCharms(book, player, true); }
                 if (menuInput.Key == ConsoleKey.E) { popUp("Extracting ALLL Charms"); }
             }
@@ -73,7 +75,7 @@ namespace Chesti.Console
                 print(" C. New Tool \n S. Select Tool \n E. Exterminate Tool");
                 menuInput = readKey();
                 if (menuInput.Key == ConsoleKey.Escape) { break; }
-                if (menuInput.Key == ConsoleKey.C) { Core.Methods.ToolChest(player, 1); }
+                if (menuInput.Key == ConsoleKey.C) { Core.Methods.ToolChest(player, 50); }
                 if (menuInput.Key == ConsoleKey.S) { ViewTools(book, player, true); ; }
                 if (menuInput.Key == ConsoleKey.E) { popUp("Welp there goes ur tool"); }
             }
@@ -94,7 +96,7 @@ namespace Chesti.Console
                 if (menuInput.Key == ConsoleKey.Escape){ break; }
                 if (menuInput.Key == ConsoleKey.S) { popUp("Soz not yet"); }
                 if (menuInput.Key == ConsoleKey.F) { popUp("They are currently away"); }
-                //    if (menuInput.Key == ConsoleKey.B && player.Selected != null){ VerifyBattle(player, unlock.Result); }
+                if (menuInput.Key == ConsoleKey.C && player.SelectedTool != -1){ VerifyBattle(player, unlock.Result); }
             }
         }
     }

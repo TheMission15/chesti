@@ -1,5 +1,6 @@
 ﻿using Chesti.Core.Model;
 using Chesti.Core.Result;
+using static Chesti.Core.Model.Catalogue;
 namespace Chesti.Core
 {
     public static class Methods
@@ -80,7 +81,7 @@ namespace Chesti.Core
 
         public static StringResult CharmChest(Player player, int odds)
         {
-            Catalogue.LoadSkills();
+            LoadSkills();
             int r;
             Rarity rarity = 0;
             if (player.Wallet.Scales <= 0)
@@ -100,11 +101,11 @@ namespace Chesti.Core
                     rarity++;
                 }
             }
-            int count = Catalogue.Skills[(int)rarity].Count;
+            int count = Skills[0].Count;
             if (count > 0)
             {
                 r = randInt(0, count-1);
-                player.Charms.Add(new(Catalogue.Skills[(int)rarity][r]));
+                player.Charms.Add(new(Skills[(int)rarity][r]));
                 DataManager.SavePlayer(player);
                 Charm charm = player.Charms[^1];
                 return new(true, $"{charm}");
@@ -133,14 +134,14 @@ namespace Chesti.Core
 
         public static StringResult ToolChest(Player player, int odds)
         {
-            Catalogue.LoadItems();
-            int count = Catalogue.Items.Count;
+            LoadItems();
+            int count = Items.Count-1;
             int r;
             Rarity rarity = 0;
-            if (player.Wallet.Scales <= 0)
-            {
-                return new(false, "Out of Scales");
-            }
+            //if (player.Wallet.Scales <= 0)
+            //{
+            //    return new(false, "Out of Scales");
+            //}
             while (true)
             { 
                 r = randInt(1, 100);
@@ -157,7 +158,7 @@ namespace Chesti.Core
             if (count > 0)
             {
                 r = randInt(0, count);
-                player.Tools.Add(new(Catalogue.Items[count], rarity));
+                player.Tools.Add(new(Items[count], rarity));
                 player.Wallet.Scales--;
                 DataManager.SavePlayer(player);
                 return new(true, $"New Tool! \n {player.Tools[^1]}, {rarity}");
