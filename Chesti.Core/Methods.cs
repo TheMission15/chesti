@@ -101,7 +101,7 @@ namespace Chesti.Core
                     rarity++;
                 }
             }
-            int count = Skills[0].Count;
+            int count = Skills[(int)rarity].Count;
             if (count > 0)
             {
                 r = randInt(0, count-1);
@@ -135,13 +135,13 @@ namespace Chesti.Core
         public static StringResult ToolChest(Player player, int odds)
         {
             LoadItems();
-            int count = Items.Count-1;
+            int count = Items.Count;
             int r;
             Rarity rarity = 0;
-            //if (player.Wallet.Scales <= 0)
-            //{
-            //    return new(false, "Out of Scales");
-            //}
+            if (player.Wallet.Scales <= 0)
+            {
+                return new(false, "Out of Scales");
+            }
             while (true)
             { 
                 r = randInt(1, 100);
@@ -157,9 +157,9 @@ namespace Chesti.Core
             }
             if (count > 0)
             {
-                r = randInt(0, count);
-                player.Tools.Add(new(Items[count], rarity));
-                player.Wallet.Scales--;
+                r = randInt(0, count-1);
+                player.Tools.Add(new(Items[r], rarity));
+                //player.Wallet.Scales--;
                 DataManager.SavePlayer(player);
                 return new(true, $"New Tool! \n {player.Tools[^1]}, {rarity}");
             }

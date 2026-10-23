@@ -11,5 +11,9 @@
             Weight = weight;
             Groups = groups;
         }
+        public override string ToString()
+        {
+            return $"{Name}, {Weight}, {Groups}";
+        }
     }
 }

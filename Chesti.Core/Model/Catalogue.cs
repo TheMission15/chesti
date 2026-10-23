@@ -5,7 +5,7 @@
 
         public static void SkillList(int i)
         {
-            Skills[i] = DataManager.LoadSkills(0);
+            Skills[i] = DataManager.LoadSkills((Rarity)i);
         }
         public static void LoadItems()
         {
@@ -14,13 +14,13 @@
         }
         public static void LoadSkills()
         {
-            for (int i = 0; i < Skills.Count(); i++)
+            for (int i = 0; i < 4; i++)
             {
                 SkillList(i);
             }
         }
 
-        public static List<Skill>[] Skills { get; } = new List<Skill>[4];
+        public static List<Skill>[] Skills { get; } = { [], [], [], [] };
         //public static Group?[] groups = new Group?[2];
         public static List<Item> Items { get; } = [];
     }

@@ -169,7 +169,7 @@ namespace Chesti.Console
             Player npc = PlayerSaves("npc"); NPC(npc);
             Book<Tool> book;
             Battle battle = new(player, npc, 3, 500, false);
-            ConsoleKey key;
+            ConsoleKey key = ConsoleKey.Z;
 
             for (int i = 0; i < battle.BestOf; i++)
             {
@@ -184,8 +184,13 @@ namespace Chesti.Console
                     while (battle.RoundCondition())
                     {
                         RoundUI(battle);
-                        if (battle.Fighter1.SkillUsed == null) { print(ListCharms(player)); }
-                        key = readKey().Key;
+                        if (battle.Fighter1.SkillUsed == null) 
+                        {
+                            print(ListCharms(player));
+                            key = readKey().Key;
+                        }
+                        else if (battle.Fighter2.SkillUsed == null)
+                            key = readKey().Key;
                         battle.PlayTurn(key);
                     }   
                     popUp(battle.EndOfRound());    

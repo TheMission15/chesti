@@ -12,7 +12,7 @@ namespace Chesti.Core.Model
         public Residue()
         {
             Max = 500;
-            Min = 200;
+            Min = -50;
             CritChance = 1;
             Essence = 0;
             Store = 0;

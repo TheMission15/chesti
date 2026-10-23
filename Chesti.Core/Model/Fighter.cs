@@ -57,27 +57,29 @@ namespace Chesti.Core.Model
                     //    synergy += 0.08;
                     //}
                 }
-                if (random <= SkillUsed.Build.CritChance) 
+                else if (SkillUsed.Group == 0)
+                    synergy += 0.1;
+                if (random <= SkillUsed.Build.CritChance)
                 {
-                    Damage = Convert.ToInt32(Tool.Weight * SkillUsed.Power);
-                    return;
+                    Damage = (int)Math.Round(SkillUsed.Power * (Tool.Weight + SkillUsed.Speed)*1.0, MidpointRounding.AwayFromZero);
                 }
                 else
                 {
-                    random = randInt(SkillUsed.Build.Min + (SkillUsed.Build.Max/2), SkillUsed.Build.Max);
+                    random = randInt(SkillUsed.Build.Min + (SkillUsed.Build.Max / 2), SkillUsed.Build.Max);
+                    Damage = (int)Math.Round(SkillUsed.Power * (Tool.Weight + SkillUsed.Speed) * 0.68 * (random / 1000.0) * synergy, MidpointRounding.AwayFromZero);
                 }
 
-
-                Damage = (int)(Math.Pow(Tool.Weight,0.8) * SkillUsed.Power * (random / 1000.0) * synergy);
             }
         } // end of CalculateDamage()
         public void CalculateTurn(int turn)
         {
             if (SkillUsed != null)
             {
-                Wait = Tool.Weight + ((SkillUsed.Power + Tool.Weight) / SkillUsed.Speed);
+                Wait = (int)Math.Round(1.5+((SkillUsed.Power + Tool.Weight) / SkillUsed.Speed * 4.5), MidpointRounding.AwayFromZero);
             }
-            Wait = turn + Wait;
+            int r = randInt(0, 100);
+            int bonus = (r<25) ? -1 : (r>80) ? 1 : 0;
+            Wait = turn + Wait + bonus;
         } // end of CalculateTurn()
         public bool PassTurn(int turn, Player player, Player opponent, Fighter defender, ConsoleKey k, bool valid)
         {

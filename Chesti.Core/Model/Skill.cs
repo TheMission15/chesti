@@ -17,5 +17,10 @@
             Groups = groups;
             Element = element;
         }
+
+        public override string ToString()
+        {
+            return $"{Name}, {Rarity}, {Power}/{Speed}, {Element}, {Groups}";
+        }
     }
 }

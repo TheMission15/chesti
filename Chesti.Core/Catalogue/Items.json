@@ -1,23 +1,7 @@
 [
   {
-    "Name": "sword",
-    "Weight": 15,
-    "Groups": [
-      1,
-      4
-    ]
-  },
-  {
-    "Name": "hammer",
-    "Weight": 18,
-    "Groups": [
-      1,
-      2
-    ]
-  },
-  {
-    "Name": "bow",
-    "Weight": 6,
+    "Name": "DIH Cannon",
+    "Weight": 25,
     "Groups": [
       2,
       3
