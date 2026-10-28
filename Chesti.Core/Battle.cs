@@ -74,7 +74,7 @@ namespace Chesti.Core
             Result.Player1Break = Player1.CheckBreak();
             Result.Player2Break = Player2.CheckBreak();
         }
-        public void PlayTurn(ConsoleKey k)
+        public void PlayTurn(Input k)
         {
             Result.Player1Valid = Fighter1.PassTurn(Turn, Player1, Player2, Fighter2, k, Result.Player1Valid);
             Result.Player2Valid = Fighter2.PassTurn(Turn, Player2, Player1, Fighter1, k, Result.Player2Valid);

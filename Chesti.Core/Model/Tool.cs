@@ -20,7 +20,7 @@ namespace Chesti.Core.Model
             if (Rarity == Rarity.Standard) { Group.Add(0); }
             else if (Rarity == Rarity.New) { Group.Add(reference.Groups[0]); }
             else { Group.AddRange(reference.Groups); }
-            Durability = randInt((int)(AverageDura(Rarity) * 0.75), AverageDura(Rarity) + RoundLength(Rarity));
+            Durability = randInt((int)(AverageDura(Rarity) * 0.75), AverageDura(Rarity) + RoundLength(Rarity))*3;
             if (Rarity >= (Rarity)2) { Element = (Element)randInt(0, 6); }
         }
         public override string ToString()

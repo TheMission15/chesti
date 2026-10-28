@@ -168,7 +168,7 @@ namespace Chesti.Console
             clear();
             Player npc = PlayerSaves("npc"); NPC(npc);
             Book<Tool> book;
-            Battle battle = new(player, npc, 3, 500, false);
+            Battle battle = new(player, npc, 3, 1500, false);
             ConsoleKey key = ConsoleKey.Z;
 
             for (int i = 0; i < battle.BestOf; i++)

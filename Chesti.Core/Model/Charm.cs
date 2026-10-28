@@ -22,7 +22,7 @@ namespace Chesti.Core.Model
         }
         public override string ToString()
         {
-            return $"{Name}  {Power}/{Speed}  {Group}/{Element}";
+            return $"{Name}:  {Power}pwr/{Speed}spd,  {Group}/{Element}";
         }
     }
 }

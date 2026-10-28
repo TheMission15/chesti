@@ -8,6 +8,18 @@
         Elite,
         //Myth
     }
+    public enum Input
+    {
+        None,
+        _1 = 1,
+        _2 = 2,
+        _3 = 3,
+        Back,
+        Buy,
+        Select,
+
+        
+    }
     public enum Element // for future element specific skills
     {
         Neutral,
@@ -17,6 +29,7 @@
         Nature,
         Ice,
         Anti,
+        Radiation,
     }
     public enum Group // for weapons and skill effectiveness
     {

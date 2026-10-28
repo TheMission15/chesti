@@ -81,7 +81,7 @@ namespace Chesti.Core.Model
             int bonus = (r<25) ? -1 : (r>80) ? 1 : 0;
             Wait = turn + Wait + bonus;
         } // end of CalculateTurn()
-        public bool PassTurn(int turn, Player player, Player opponent, Fighter defender, ConsoleKey k, bool valid)
+        public bool PassTurn(int turn, Player player, Player opponent, Fighter defender, Input k, bool valid)
         {
             bool result = false;
             if (valid) { return true; }
@@ -102,11 +102,12 @@ namespace Chesti.Core.Model
             }
             else { return true; }
         } // end of PassTurn()
-        public bool SelectSkill(Player player, ConsoleKey key)
+        public bool SelectSkill(Player player, Input key)
         {
-            if (key >= ConsoleKey.D1 && key <= ConsoleKey.D3)
+            List<Input> options = [];
+            if (true)
             {
-                int index = (key - ConsoleKey.D0) - 1;
+                int index = (int)key - 1;
                 SkillUsed = player.Charms[player.ActiveCharms[index]];
 
                 if (SkillUsed != null)
